@@ -1,0 +1,229 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.UI;
+
+//[RequireComponent(typeof(CharacterController))]
+public class BasePlayerScript : MonoBehaviour {
+
+    public int TeamNumber;
+
+    public int Gold;
+    public Text GoldAmount;
+
+    [SerializeField] private float _acceleration;
+    [SerializeField] private float _drag;
+    [SerializeField] private float _maximumXZVelocity = (30 * 1000) / (60 * 60); //[m/s] 30km/h
+    [SerializeField] private float _jumpHeight;
+
+    private Transform _absoluteTransform;
+    private CharacterController _char;
+    private Animator _anim;
+
+    [HideInInspector] public Vector3 Velocity = Vector3.zero; // [m/s]
+    [HideInInspector] public Vector3 InputMovement;
+    private bool _jump;
+
+
+
+
+
+    void Start ()
+        {
+        _char = GetComponent<CharacterController>();
+        _absoluteTransform = Camera.main.transform;
+
+        #if DEBUG
+        Assert.IsNotNull(_char, "DEPENDENCY ERROR: CharacterController missing from PlayerScript");
+        #endif
+
+        }
+
+    private void Update()
+        {
+
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            TeamNumber = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            TeamNumber = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            TeamNumber = 3;
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            TeamNumber = 4;
+        }
+
+        GoldAmount.text = Gold.ToString();
+        InputMovement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        if (Input.GetButtonDown("Jump"))
+            {
+            _jump = true;
+            }
+
+        if (Input.GetButtonDown("ActionButton"))
+        {
+            RaycastHit _clickRay;
+            Physics.Raycast(transform.position, Camera.main.transform.forward, out _clickRay, 10, 1<<9);
+
+            Debug.DrawRay(transform.position, Camera.main.transform.forward, Color.red, 100);
+
+            if (_clickRay.collider != null && Gold > 0)
+            {
+                Gold-=_clickRay.collider.gameObject.GetComponent<SpawnUnitsScript>().InitiateUnit(TeamNumber);
+            }
+
+        }
+
+
+
+    }
+
+    void FixedUpdate ()
+        {
+        ApplyGround();
+        ApplyGravity();
+        ApplyMovement();
+        ApplyDragOnGround();
+        ApplyJump();
+        LimitXZVelocity();
+
+        Vector3 XZvel = Vector3.Scale(Velocity, new Vector3(1, 0, 1));
+        Vector3 localVelXZ = gameObject.transform.InverseTransformDirection(XZvel);
+
+
+
+        DoMovement();
+    }
+    public virtual void DoAction()
+    {
+
+    }
+
+    private Vector3 RelativeDirection(Vector3 direction)
+        {
+
+        Vector3 xzForward = Vector3.Scale(_absoluteTransform.forward, new Vector3(1, 0, 1));
+        Quaternion relativeRot = Quaternion.LookRotation(direction);
+
+        return relativeRot.eulerAngles;
+        }
+
+
+    private void ApplyGround()
+        {
+        if (_char.isGrounded)
+            {
+
+            Velocity -= Vector3.Project(Velocity, Physics.gravity);
+            }
+        }
+
+    private void ApplyGravity()
+        {
+        if (!_char.isGrounded)
+            {
+
+            Velocity += Physics.gravity * Time.deltaTime;
+            }
+        }
+
+    private void ApplyMovement()
+        {
+        if (_char.isGrounded)
+            {
+
+            Vector3 xzForward = Vector3.Scale(_absoluteTransform.forward, new Vector3(1, 0, 1));
+            Quaternion relativeRot = Quaternion.LookRotation(xzForward);
+
+
+            Vector3 relativeMov = relativeRot * InputMovement;
+            Velocity += relativeMov * _acceleration * Time.deltaTime;
+            }
+
+        }
+
+    private void LimitXZVelocity()
+        {
+        Vector3 yVel = Vector3.Scale(Velocity, Vector3.up);
+        Vector3 xzVel = Vector3.Scale(Velocity, new Vector3(1, 0, 1));
+
+        xzVel = Vector3.ClampMagnitude(xzVel, _maximumXZVelocity);
+
+        Velocity = xzVel + yVel;
+        }
+
+    private void ApplyDragOnGround()
+        {
+        if (_char.isGrounded)
+            {
+
+            Velocity = Velocity * (1 - _drag * Time.deltaTime); //same as lerp
+            }
+        }
+
+    private void ApplyJump()
+        {
+        if (_char.isGrounded && _jump)
+            {
+            Velocity.y += Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
+            _jump = false;
+            }
+        }
+
+    private void DoMovement()
+        {
+
+        Vector3 movement = Velocity * Time.deltaTime;
+        _char.Move(movement);
+        }
+
+    public static float ClampAngle(float angle, float min, float max)
+        {
+        angle = Mathf.Repeat(angle, 360);
+        min = Mathf.Repeat(min, 360);
+        max = Mathf.Repeat(max, 360);
+        bool inverse = false;
+        var tmin = min;
+        var tangle = angle;
+        if (min > 180)
+            {
+            inverse = !inverse;
+            tmin -= 180;
+            }
+        if (angle > 180)
+            {
+            inverse = !inverse;
+            tangle -= 180;
+            }
+        var result = !inverse ? tangle > tmin : tangle < tmin;
+        if (!result)
+            angle = min;
+
+        inverse = false;
+        tangle = angle;
+        var tmax = max;
+        if (angle > 180)
+            {
+            inverse = !inverse;
+            tangle -= 180;
+            }
+        if (max > 180)
+            {
+            inverse = !inverse;
+            tmax -= 180;
+            }
+
+        result = !inverse ? tangle < tmax : tangle > tmax;
+        if (!result)
+            angle = max;
+        return angle;
+        }
+    }
