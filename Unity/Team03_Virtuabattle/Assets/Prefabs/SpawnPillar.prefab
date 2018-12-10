@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33478227108634940}
   - component: {fileID: 23532485209342030}
   - component: {fileID: 65903194082362280}
+  - component: {fileID: 114625149045583024}
   m_Layer: 9
   m_Name: SpawnPillar
   m_TagString: Untagged
@@ -96,3 +97,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114625149045583024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1895957076362052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ddbba093a847724590cb38b54709a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoolDownTime: 0.5
+  troopType: 0
+  LandPrefab: {fileID: 1602570374587438, guid: 58b5467a4ac99f547b0d10174cb89326, type: 2}
+  SkyPrefab: {fileID: 0}
+  TeamNumber: 0
+  _tempSpawnPos: {x: 0, y: 0, z: 0}
