@@ -50,4 +50,58 @@ public class InputController : MonoBehaviour {
 
         Debug.Log("Player " + playerNumber + " is moving " + _direction + " using " + v2);
     }
+
+    //public bool PlayerMovingLeft()
+    //{
+    //    return (Input.GetAxisRaw("LeftStickHorizontal" + playerNumber) > 0 || Input.GetAxisRaw("DPADHorizontal" + playerNumber) > 0) ? true : false;
+    //}
+
+    //public bool PlayerMovingRight()
+    //{
+    //    return (Input.GetAxisRaw("LeftStickHorizontal" + playerNumber) < 0 || Input.GetAxisRaw("DPADHorizontal" + playerNumber) < 0) ? true : false;
+    //}
+
+    //public bool PlayerMovingForward()
+    //{
+    //    return (Input.GetAxisRaw("LeftStickVertical" + playerNumber) > 0 || Input.GetAxisRaw("DPADVertical" + playerNumber) > 0) ? true : false;
+    //}
+
+    //public bool PlayerMovingBackwards()
+    //{
+    //    return (Input.GetAxisRaw("LeftStickVertical" + playerNumber) < 0 || Input.GetAxisRaw("DPADVertical" + playerNumber) < 0) ? true : false;
+    //}
+
+    // Camera-related
+
+    //public bool CameraMovingLeft()
+    //{
+    //    return (Input.GetAxisRaw("RightStickHorizontal" + playerNumber) > 0) ? true : false;
+    //}
+
+    //public bool CameraMovingRight()
+    //{
+    //    return (Input.GetAxisRaw("RightStickHorizontal" + playerNumber) < 0) ? true : false;
+    //}
+
+    //public bool CameraMovingForward()
+    //{
+    //    return (Input.GetAxisRaw("RightStickVertical" + playerNumber) > 0) ? true : false;
+    //}
+
+    //public bool CameraMovingBackwards()
+    //{
+    //    return (Input.GetAxisRaw("RightStickVertical" + playerNumber) < 0) ? true : false;
+    //}
+
+    public float CameraMovementHorizontal()
+    {
+        return Input.GetAxis("RightStickHorizontal" + playerNumber);
+        //return Input.GetAxisRaw("RightStickHorizontal" + playerNumber); No smoothing
+    }
+
+    public float CameraMovementVertical()
+    {
+        return Input.GetAxis("RightStickVertical" + playerNumber);
+        //return Input.GetAxisRaw("RightStickVertical" + playerNumber); No smoothing
+    }
 }
