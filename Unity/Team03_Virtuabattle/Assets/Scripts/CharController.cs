@@ -14,9 +14,11 @@ public class CharController : MonoBehaviour {
     [SerializeField] private float _maximumXZVelocity = (30 * 1000) / (60 * 60); //[m/s] 30km/h
     [SerializeField] private float _jumpHeight;
 
-    private Transform _absoluteTransform;
-    private CharacterController _char;
-    private Animator _anim;
+    Transform _absoluteTransform;
+    CharacterController _char;
+    Animator _anim;
+    InputController inputController;
+    Camera camera;
 
     [HideInInspector] public Vector3 Velocity = Vector3.zero; // [m/s]
     [HideInInspector] public Vector3 InputMovement;
@@ -29,7 +31,9 @@ public class CharController : MonoBehaviour {
     void Start ()
         {
         _char = GetComponent<CharacterController>();
-        _absoluteTransform = Camera.main.transform;
+        camera = GetComponentInChildren<Camera>();
+        _absoluteTransform = camera.transform;
+        inputController = GetComponent<InputController>();
 
         #if DEBUG
         Assert.IsNotNull(_char, "DEPENDENCY ERROR: CharacterController missing from PlayerScript");
@@ -41,18 +45,18 @@ public class CharController : MonoBehaviour {
         {
 
 
-        InputMovement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        if (Input.GetButtonDown("Jump"))
+        InputMovement = new Vector3(inputController.PlayerMovementHorizontal(), 0, inputController.PlayerMovementVertical()).normalized;
+        if (inputController.IsJumping())
             {
             _jump = true;
             }
 
-        if (Input.GetButtonDown("ActionButton"))
+        if (inputController.IsAction())
         {
             RaycastHit _clickRay;
-            Physics.Raycast(transform.position, Camera.main.transform.forward, out _clickRay, 10, 1<<9);
+            Physics.Raycast(transform.position, _absoluteTransform.forward, out _clickRay, 10, 1<<9);
 
-            Debug.DrawRay(transform.position, Camera.main.transform.forward, Color.red, 100);
+            Debug.DrawRay(transform.position, _absoluteTransform.forward, Color.red, 100);
 
 
         }
