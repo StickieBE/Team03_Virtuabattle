@@ -202,6 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4565199690918518}
+  - component: {fileID: 114974083469390204}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -607,6 +608,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114974083469390204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932090307879420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5092309909b2308468219502d4571bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124247727100956106
 Behaviour:
   m_ObjectHideFlags: 1
