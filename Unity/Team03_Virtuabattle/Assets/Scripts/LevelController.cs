@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour {
 
+    public int AmountOfPlayers, SceneToLoad;
     public GameObject PlayerPrefab;
     public GameObject[] Spawns;
 
     // Use this for initialization
     void Start () {
-        GameSettings.AmountOfPlayers = 4;
-        GameSettings.SceneToLoad = 2;
+
+        GameSettings.AmountOfPlayers = (AmountOfPlayers == 0) ? 4 : AmountOfPlayers;
+        GameSettings.SceneToLoad = (SceneToLoad == 0) ? 2 : SceneToLoad;
 
         Debug.Log(
             "Amount of players: " + GameSettings.AmountOfPlayers +
