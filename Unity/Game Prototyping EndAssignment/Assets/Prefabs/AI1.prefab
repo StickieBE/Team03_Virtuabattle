@@ -188,10 +188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TeamNumber: 1
   health: 10
-  _spawnPoints: []
-  _hasTarget: 0
+  SpawnPoints: []
+  HasTarget: 0
   Target: {fileID: 0}
   ShootTime: 0.5
+  _checkTimerCooldown: 0
+  BulletPrefab: {fileID: 1862016636852546, guid: 3e62a678a0d197140b88d9ece09aca4d,
+    type: 2}
 --- !u!135 &135234011142663512
 SphereCollider:
   m_ObjectHideFlags: 1

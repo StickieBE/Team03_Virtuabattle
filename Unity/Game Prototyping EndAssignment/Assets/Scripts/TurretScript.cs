@@ -45,23 +45,9 @@ public class TurretScript : MonoBehaviour {
             if (Enemies.Length > 0)
             {
                 TeamNumber = Enemies[0].gameObject.GetComponent<AIScript>().TeamNumber;
-                switch (TeamNumber)
-                {
-                    case 1:
-                        _layermask = ((1 << 11) | (1 << 12) | (1 << 13));
-                        break;
-                    case 2:
-                        _layermask = ((1 << 10) | (1 << 12) | (1 << 13));
-                        break;
-                    case 3:
-                        _layermask = ((1 << 11) | (1 << 10) | (1 << 13));
-                        break;
-                    case 4:
-                        _layermask = ((1 << 11) | (1 << 12) | (1 << 10));
-                        break;
-                    default:
-                        break;
-                }
+
+                _layermask = DefineLayerMask(TeamNumber);
+
                 foreach (Renderer material in Head.GetComponentsInChildren<Renderer>())
                 {
                     material.material = TurretColor[TeamNumber - 1];
@@ -77,16 +63,16 @@ public class TurretScript : MonoBehaviour {
                 Timer -= Time.deltaTime;
                 if (Timer <= 0)
                 {
-                    Shoot(SpawnPosition, Enemies[Enemies.Length - 1].transform.position + Enemies[Enemies.Length - 1].transform.forward * 0.6f, Head.transform.rotation);
+                    Shoot(BulletPrefab, SpawnPosition, Enemies[Enemies.Length - 1].transform.position + Enemies[Enemies.Length - 1].transform.forward * 0.6f, Head.transform.rotation);
                     Timer = ShootTime;
                 }
 
                 foreach (Collider enemy in Enemies)
                 {
-                    if (enemy.GetComponent<AIScript>()._hasTarget == false)
+                    if (enemy.GetComponent<AIScript>().HasTarget == false)
                     {
                         enemy.GetComponent<AIScript>().Target = Head;
-                        enemy.GetComponent<AIScript>()._hasTarget = true;
+                        enemy.GetComponent<AIScript>().HasTarget = true;
                     }
                 }
             }
@@ -104,11 +90,36 @@ public class TurretScript : MonoBehaviour {
 
     }
 
-    public void Shoot(Vector3 SpawnPos, Vector3 Target, Quaternion Rotation)
+    public static void Shoot(GameObject Projectile, Vector3 SpawnPos, Vector3 Target, Quaternion Rotation)
     {
-        GameObject Bullet = Instantiate(BulletPrefab, SpawnPos, Rotation);
+
+        GameObject Bullet = Instantiate(Projectile, SpawnPos, Rotation);
         Bullet.GetComponent<BulletScript>().Target = Target;
         Bullet.GetComponent<BulletScript>().Origin = SpawnPos;
 
+    }
+
+    public static LayerMask DefineLayerMask(int ObjectTeamNumber)
+    {
+        LayerMask Layermask = new LayerMask();
+
+        switch (ObjectTeamNumber)
+        {
+            case 1:
+                 Layermask = ((1 << 11) | (1 << 12) | (1 << 13));
+                break;
+            case 2:
+                Layermask = ((1 << 10) | (1 << 12) | (1 << 13));
+                break;
+            case 3:
+                Layermask = ((1 << 11) | (1 << 10) | (1 << 13));
+                break;
+            case 4:
+                Layermask = ((1 << 11) | (1 << 12) | (1 << 10));
+                break;
+            default:
+                break;
+        }
+        return Layermask;
     }
 }

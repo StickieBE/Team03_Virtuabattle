@@ -64,7 +64,7 @@ public class SpawnUnitsScript : MonoBehaviour {
                 _lastSpwanedUnit = Instantiate(_unitPrefab, _gameControl.TeamSpawnPoints[TeamNumber-1].position, Quaternion.identity);
                 _lastSpwanedUnit.GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
                 _lastSpwanedUnit.GetComponent<AIScript>().TeamNumber = TeamNumber;
-                _lastSpwanedUnit.GetComponent<AIScript>()._spawnPoints = _gameControl.TeamSpawnPoints;
+                _lastSpwanedUnit.GetComponent<AIScript>().SpawnPoints = _gameControl.TeamSpawnPoints;
                 _timer = CoolDownTime;
                 return _goldCost;
             }

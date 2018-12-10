@@ -8,18 +8,26 @@ public class AIScript : MonoBehaviour {
     public int TeamNumber;
     public float health;
 
-    public Transform[] _spawnPoints;
+    public Transform[] SpawnPoints;
+    private Collider[] _enemies;
 
     private int _rndPathNumber;
     private Transform _destination;
     private NavMeshAgent _agent;
+    private float _rndDestinationOffset;
 
-    public bool _hasTarget = false;
+    public bool HasTarget = false;
     public GameObject Target;
 
     private float _timer;
     public float ShootTime;
     private Vector3 _shootPos;
+
+    private float _checkTimer = 0;
+    public float _checkTimerCooldown;
+    public GameObject BulletPrefab;
+
+
     // Use this for initialization
     void Start () {
 
@@ -33,8 +41,8 @@ public class AIScript : MonoBehaviour {
             _rndPathNumber = Random.Range(0, 4);
         }
 
-        transform.position = _spawnPoints[TeamNumber - 1].position;
-        _destination = _spawnPoints[_rndPathNumber];
+        transform.position = SpawnPoints[TeamNumber - 1].position;
+        _destination = SpawnPoints[_rndPathNumber];
 
 
         _agent = GetComponent<NavMeshAgent>();
@@ -53,21 +61,45 @@ public class AIScript : MonoBehaviour {
 
         _timer-= Time.deltaTime;
 
-        if (_hasTarget == true)
+
+        if (HasTarget == true && Target != null)
         {
             gameObject.transform.LookAt(Target.transform);
             _shootPos = transform.position + (Target.transform.position - transform.position).normalized;
             if (_timer <=0)
             {
-                Target.GetComponentInParent<TurretScript>().Shoot(_shootPos, Target.transform.position, gameObject.transform.rotation);
+                TurretScript.Shoot(BulletPrefab, _shootPos, Target.transform.position, gameObject.transform.rotation);
                 _timer = ShootTime;
             }
 
             if (Vector3.Distance(transform.position, Target.transform.position) >= 3f)
             {
                 Target = null;
-                _hasTarget = false;
+                HasTarget = false;
             }
+
+            
+        }
+
+        else
+        {
+            _checkTimer -= Time.deltaTime;
+            if (_checkTimer <=0)
+            {
+                _enemies = Physics.OverlapSphere(transform.position, 2.5f, TurretScript.DefineLayerMask(TeamNumber));
+            }
+
+            if (_enemies.Length>0)
+            {
+                Target = _enemies[_enemies.Length-1].gameObject;
+                HasTarget = true;
+            }
+
+            else
+            {
+                _checkTimer = _checkTimerCooldown;
+            }
+
         }
 
 
@@ -75,7 +107,12 @@ public class AIScript : MonoBehaviour {
 
         if (Vector3.Distance(_agent.destination, _agent.transform.position) <=0.3f)
         {
-            Destroy(gameObject);
+            if (Target != null)
+            {
+                _rndDestinationOffset = Random.Range(0f, 1f);
+                _agent.destination = new Vector3(Target.transform.position.x + _rndDestinationOffset, Target.transform.position.y + _rndDestinationOffset, Target.transform.position.z + _rndDestinationOffset);
+            }
+
         }
 	}
 
