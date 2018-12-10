@@ -202,6 +202,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4565199690918518}
+  - component: {fileID: 114179624020580208}
+  - component: {fileID: 143511160825591216}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -441,6 +443,23 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503528242092672}
   m_Enabled: 0
+--- !u!114 &114179624020580208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932090307879420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553604f262a59074e8b56aba39f0309d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _acceleration: 0
+  _drag: 0
+  _maximumXZVelocity: 8
+  _jumpHeight: 0
+  Velocity: {x: 0, y: 0, z: 0}
+  InputMovement: {x: 0, y: 0, z: 0}
 --- !u!114 &114405911683077556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -640,6 +659,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!143 &143511160825591216
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932090307879420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222008143761991192
 CanvasRenderer:
   m_ObjectHideFlags: 1
