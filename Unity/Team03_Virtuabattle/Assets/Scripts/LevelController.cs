@@ -31,7 +31,7 @@ public class LevelController : MonoBehaviour {
         {
             GameObject _createdPlayer = Instantiate(PlayerPrefab, Spawns[i].transform);
             _createdPlayer.transform.parent = _parent.transform;
-            _createdPlayer.GetComponent<SplitscreenInit>().Player = i + 1;
+            _createdPlayer.GetComponent<VariableController>().Player = i + 1;
             _createdPlayer.transform.LookAt(Vector3.zero);
         }
     }

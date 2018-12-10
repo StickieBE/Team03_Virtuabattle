@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VariableController : MonoBehaviour {
 
-    public int Player { get; set; }
+    public int Player;
     //public int Gold { get; set; }
     //public int Health { get; set; }
     //public int AmmunitionType1 { get; set; }
