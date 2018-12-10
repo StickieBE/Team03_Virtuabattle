@@ -7,15 +7,40 @@ public class InputController : MonoBehaviour {
 
     VariableController variableController;
     int playerNumber;
+    Transform _cameraTransform;
+
+    public LayerMask CastLayer;
 
     void Start()
     {
         variableController = GetComponent<VariableController>();
         playerNumber = variableController.Player;
+        
+        _cameraTransform = GetComponentInChildren<Camera>().transform;
     }
 
     // Update is called once per frame
     void Update ()
+    {
+        //DebugInput();
+
+        if (IsAction())
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, _cameraTransform.forward, out hit, 10, CastLayer))
+            {
+                GameObject _hitObject = hit.transform.gameObject;
+                if (_hitObject.tag == "SpawnPillar")
+                {
+                    SpawnUnitsScript _spawner = _hitObject.GetComponent<SpawnUnitsScript>();
+                    if (_spawner.TeamNumber == variableController.Player) _spawner.SpawnUnit();
+                }
+            }
+            Debug.DrawRay(transform.position, _cameraTransform.forward, Color.red, 100);
+        }
+    }
+
+    void DebugInput()
     {
         // Buttons
         if (Input.GetButtonDown("ButtonSquare" + playerNumber)) Debug.Log("Player " + playerNumber + " pressed []");

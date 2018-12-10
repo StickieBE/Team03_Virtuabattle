@@ -25,10 +25,6 @@ public class CharController : MonoBehaviour {
     [HideInInspector] public Vector3 InputMovement;
     private bool _jump;
 
-
-
-
-
     void Start ()
         {
         _char = GetComponent<CharacterController>();
@@ -43,27 +39,12 @@ public class CharController : MonoBehaviour {
         }
 
     private void Update()
-        {
-
-
+    {
         InputMovement = new Vector3(inputController.PlayerMovementHorizontal(), 0, inputController.PlayerMovementVertical()).normalized;
         if (inputController.IsJumping())
             {
             _jump = true;
             }
-
-        if (inputController.IsAction())
-        {
-            RaycastHit _clickRay;
-            Physics.Raycast(transform.position, _absoluteTransform.forward, out _clickRay, 10, 1<<9);
-
-            Debug.DrawRay(transform.position, _absoluteTransform.forward, Color.red, 100);
-
-
-        }
-
-
-
     }
 
     void FixedUpdate ()
