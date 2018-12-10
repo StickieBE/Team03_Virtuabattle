@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553604f262a59074e8b56aba39f0309d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityMultiplier: 0
+  gravityMultiplier: 1.8
   _acceleration: 250
   _drag: 16
   _maximumXZVelocity: 15
@@ -576,6 +576,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0280c404d0c02854f94f1cbb25413526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CastLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &114716671468693210
 MonoBehaviour:
   m_ObjectHideFlags: 1
