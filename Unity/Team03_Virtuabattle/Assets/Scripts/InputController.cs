@@ -51,6 +51,28 @@ public class InputController : MonoBehaviour {
         Debug.Log("Player " + playerNumber + " is moving " + _direction + " using " + v2);
     }
 
+    public float PlayerMovementHorizontal()
+    {
+        return Input.GetAxis("LeftStickHorizontal" + playerNumber);
+        //return Input.GetAxisRaw("LeftStickHorizontal" + playerNumber); // No smoothing
+    }
+
+    public float PlayerMovementVertical()
+    {
+        return Input.GetAxis("LeftStickVertical" + playerNumber);
+        //return Input.GetAxisRaw("LeftStickVertical" + playerNumber); // No smoothing
+    }
+
+    public bool IsJumping()
+    {
+        return Input.GetButtonDown("ButtonCross" + playerNumber);
+    }
+
+    public bool IsAction()
+    {
+        return Input.GetButtonDown("ButtonSquare" + playerNumber);
+    }
+
     //public bool PlayerMovingLeft()
     //{
     //    return (Input.GetAxisRaw("LeftStickHorizontal" + playerNumber) > 0 || Input.GetAxisRaw("DPADHorizontal" + playerNumber) > 0) ? true : false;
