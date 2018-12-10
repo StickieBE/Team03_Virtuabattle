@@ -472,6 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553604f262a59074e8b56aba39f0309d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravityMultiplier: 0
   _acceleration: 250
   _drag: 16
   _maximumXZVelocity: 15
