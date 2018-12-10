@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class CharController : MonoBehaviour {
 
 
+    [SerializeField] private float gravityMultiplier;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _drag;
     [SerializeField] private float _maximumXZVelocity = (30 * 1000) / (60 * 60); //[m/s] 30km/h
@@ -107,7 +108,7 @@ public class CharController : MonoBehaviour {
         if (!_char.isGrounded)
             {
 
-            Velocity += Physics.gravity * Time.deltaTime;
+            Velocity += (Physics.gravity * gravityMultiplier) * Time.deltaTime;
             }
         }
 
