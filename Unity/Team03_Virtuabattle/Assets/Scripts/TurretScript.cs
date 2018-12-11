@@ -147,7 +147,7 @@ public class TurretScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "AI" && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) _enemies.Add(other);
+        if (other.gameObject.tag == "AI" && other.gameObject.GetComponent<AIScript>() != null && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) _enemies.Add(other);
     }
 
     private void OnTriggerExit(Collider other)

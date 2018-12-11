@@ -11,6 +11,22 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1602570374587438}
   m_IsPrefabAsset: 1
+--- !u!1 &1480845897262796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4234092541118144}
+  - component: {fileID: 135382261540688018}
+  m_Layer: 10
+  m_Name: GameObject 2
+  m_TagString: AI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1602570374587438
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,6 +65,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4234092541118144
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1480845897262796}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.9873931, y: 2.9873931, z: 2.9873931}
+  m_Children: []
+  m_Father: {fileID: 4883562434866336}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4570983945225120
 Transform:
   m_ObjectHideFlags: 1
@@ -69,10 +98,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1602570374587438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.127842, y: 1.190986, z: 18.212269}
+  m_LocalPosition: {x: 41.335457, y: 0.16737, z: 40.044434}
   m_LocalScale: {x: 0.33474, y: 0.33474, z: 0.33474}
   m_Children:
   - {fileID: 4570983945225120}
+  - {fileID: 4234092541118144}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,7 +223,8 @@ MonoBehaviour:
   Target: {fileID: 0}
   ShootTime: 0
   _checkTimerCooldown: 0
-  BulletPrefab: {fileID: 0}
+  BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
+    type: 2}
 --- !u!135 &135234011142663512
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -205,6 +236,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135382261540688018
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1480845897262796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195896933209100898
 NavMeshAgent:

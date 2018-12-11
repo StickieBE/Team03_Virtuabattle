@@ -145,7 +145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OriginName: 
   Target: {x: 0, y: 0, z: 0}
-  ShootForce: 10
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  ShootForce: 25
 --- !u!135 &135232630617107878
 SphereCollider:
   m_ObjectHideFlags: 1
