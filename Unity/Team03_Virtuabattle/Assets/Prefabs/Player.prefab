@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 4186902167168802}
   - component: {fileID: 33777020810169466}
   - component: {fileID: 23016251613394320}
-  - component: {fileID: 136183259772027064}
   m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
@@ -122,7 +121,6 @@ GameObject:
   - component: {fileID: 4246322129396792}
   - component: {fileID: 33877165927063430}
   - component: {fileID: 23565107541143824}
-  - component: {fileID: 136154724945742632}
   m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
@@ -209,6 +207,7 @@ GameObject:
   - component: {fileID: 114683165151432566}
   - component: {fileID: 114004849409587558}
   - component: {fileID: 114932254297152250}
+  - component: {fileID: 114616944813817542}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -267,7 +266,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555182291212536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4186902167168802}
@@ -473,10 +472,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityMultiplier: 1.8
-  _acceleration: 250
-  _drag: 16
+  _acceleration: 200
+  _drag: 18
   _maximumXZVelocity: 15
-  _jumpHeight: 1
+  _jumpHeight: 1.5
   Velocity: {x: 0, y: 0, z: 0}
   InputMovement: {x: 0, y: 0, z: 0}
 --- !u!114 &114405911683077556
@@ -554,6 +553,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114616944813817542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932090307879420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1977afef29087be469c2a7397b6b5eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114627456966367878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -700,32 +710,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503528242092672}
   m_Enabled: 1
---- !u!136 &136154724945742632
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555182291212536}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136183259772027064
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1554337834791938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!143 &143511160825591216
 CharacterController:
   m_ObjectHideFlags: 1
@@ -736,13 +720,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.9
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.01
+  m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!222 &222008143761991192
 CanvasRenderer:
   m_ObjectHideFlags: 1

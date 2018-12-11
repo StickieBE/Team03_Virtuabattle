@@ -11,6 +11,15 @@ public class InputController : MonoBehaviour {
 
     public LayerMask CastLayer;
 
+    public bool ActionPressed => Input.GetButton("ButtonSquare" + playerNumber);
+    public bool Action => Input.GetButtonDown("ButtonSquare" + playerNumber);
+    public bool JumpPressed => Input.GetButton("ButtonCross" + playerNumber);
+    public bool Jump => Input.GetButtonDown("ButtonCross" + playerNumber);
+    public float PlayerMovementHorizontal => Input.GetAxis("LeftStickHorizontal" + playerNumber);
+    public float PlayerMovementVertical => Input.GetAxis("LeftStickVertical" + playerNumber);
+    public float CameraMovementHorizontal => Input.GetAxis("RightStickHorizontal" + playerNumber);
+    public float CameraMovementVertical => Input.GetAxis("RightStickVertical" + playerNumber);
+
     void Start()
     {
         variableController = GetComponent<VariableController>();
@@ -22,9 +31,9 @@ public class InputController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        DebugInput();
+        //DebugInput();
 
-        if (IsAction())
+        if (Action)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, _cameraTransform.forward, out hit, 10, CastLayer))
@@ -33,7 +42,6 @@ public class InputController : MonoBehaviour {
                 if (_hitObject.tag == "SpawnPillar")
                 {
                     SpawnUnitsScript _spawner = _hitObject.GetComponent<SpawnUnitsScript>();
-                    //Debug.Log("Hit" + _spawner.TeamNumber + variableController.Player);
                     if (_spawner.TeamNumber == variableController.Player) _spawner.SpawnUnit();
                 }
             }
@@ -77,28 +85,6 @@ public class InputController : MonoBehaviour {
         Debug.Log("Player " + playerNumber + " is moving " + _direction + " using " + v2);
     }
 
-    public float PlayerMovementHorizontal()
-    {
-        return Input.GetAxis("LeftStickHorizontal" + playerNumber);
-        //return Input.GetAxisRaw("LeftStickHorizontal" + playerNumber); // No smoothing
-    }
-
-    public float PlayerMovementVertical()
-    {
-        return Input.GetAxis("LeftStickVertical" + playerNumber);
-        //return Input.GetAxisRaw("LeftStickVertical" + playerNumber); // No smoothing
-    }
-
-    public bool IsJumping()
-    {
-        return Input.GetButtonDown("ButtonCross" + playerNumber);
-    }
-
-    public bool IsAction()
-    {
-        return Input.GetButtonDown("ButtonSquare" + playerNumber);
-    }
-
     //public bool PlayerMovingLeft()
     //{
     //    return (Input.GetAxisRaw("LeftStickHorizontal" + playerNumber) > 0 || Input.GetAxisRaw("DPADHorizontal" + playerNumber) > 0) ? true : false;
@@ -140,16 +126,4 @@ public class InputController : MonoBehaviour {
     //{
     //    return (Input.GetAxisRaw("RightStickVertical" + playerNumber) < 0) ? true : false;
     //}
-
-    public float CameraMovementHorizontal()
-    {
-        return Input.GetAxis("RightStickHorizontal" + playerNumber);
-        //return Input.GetAxisRaw("RightStickHorizontal" + playerNumber); No smoothing
-    }
-
-    public float CameraMovementVertical()
-    {
-        return Input.GetAxis("RightStickVertical" + playerNumber);
-        //return Input.GetAxisRaw("RightStickVertical" + playerNumber); No smoothing
-    }
 }
