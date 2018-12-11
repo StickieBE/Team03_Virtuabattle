@@ -11,7 +11,7 @@ public class SpawnUnitsScript : MonoBehaviour {
     private float _timer;
     private GameObject _lastSpawnedUnit;
 
-    //private AIPathControl _gameControl;
+    private AIPathControl _gameControl;
 
     public enum TroopType
     {
@@ -34,11 +34,10 @@ public class SpawnUnitsScript : MonoBehaviour {
     {
         variableController = GetComponent<VariableController>();
 
-        //_gameControl = GameObject.Find("Game Control").GetComponent<AIPathControl>();
+        _gameControl = GameObject.Find("LevelController").GetComponent<AIPathControl>();
 
         //GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
 
-        //_tempSpawnPos = _gameControl.TeamSpawnPoints[TeamNumber - 1].position;
 
         if (troopType == TroopType.Land)
         {
@@ -63,10 +62,11 @@ public class SpawnUnitsScript : MonoBehaviour {
     {
         if (_timer <= 0)
         {
+        Debug.Log("Spawn");
             _lastSpawnedUnit = Instantiate(_unitPrefab, _tempSpawnPos, Quaternion.identity);
-            //_lastSpwanedUnit.GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
-            //_lastSpwanedUnit.GetComponent<AIScript>().TeamNumber = TeamNumber;
-            //_lastSpwanedUnit.GetComponent<AIScript>().SpawnPoints = _gameControl.TeamSpawnPoints;
+            //_lastSpawnedUnit.GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
+            _lastSpawnedUnit.GetComponent<AIScript>().TeamNumber = TeamNumber;
+            _lastSpawnedUnit.GetComponent<AIScript>().SpawnPoints = _gameControl.TeamSpawnPoints;
             _timer = CoolDownTime;
         }
     }

@@ -22,7 +22,7 @@ public class InputController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        //DebugInput();
+        DebugInput();
 
         if (IsAction())
         {
@@ -33,6 +33,7 @@ public class InputController : MonoBehaviour {
                 if (_hitObject.tag == "SpawnPillar")
                 {
                     SpawnUnitsScript _spawner = _hitObject.GetComponent<SpawnUnitsScript>();
+                    //Debug.Log("Hit" + _spawner.TeamNumber + variableController.Player);
                     if (_spawner.TeamNumber == variableController.Player) _spawner.SpawnUnit();
                 }
             }
