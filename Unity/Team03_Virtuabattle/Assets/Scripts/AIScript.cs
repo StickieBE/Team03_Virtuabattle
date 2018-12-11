@@ -61,48 +61,19 @@ public class AIScript : MonoBehaviour {
         if (health <=0)
         { Destroy(gameObject); }
 
-        //_timer-= Time.deltaTime;
+        _timer -= Time.deltaTime;
 
 
-        //if (HasTarget == true && Target != null)
-        //{
-        //    gameObject.transform.LookAt(Target.transform);
-        //    _shootPos = transform.position + (Target.transform.position - transform.position).normalized;
-        //    if (_timer <=0)
-        //    {
-        //        TurretScript.Shoot(BulletPrefab, _shootPos, Target.transform.position, gameObject.transform.rotation);
-        //        _timer = ShootTime;
-        //    }
-
-        //    if (Vector3.Distance(transform.position, Target.transform.position) >= 3f)
-        //    {
-        //        Target = null;
-        //        HasTarget = false;
-        //    }
-
-            
-        //}
-
-        //else
-        //{
-        //    _checkTimer -= Time.deltaTime;
-        //    if (_checkTimer <=0)
-        //    {
-        //        _enemies = Physics.OverlapSphere(transform.position, 2.5f, TurretScript.DefineLayerMask(TeamNumber));
-        //    }
-
-        //    if (_enemies.Length>0)
-        //    {
-        //        Target = _enemies[_enemies.Length-1].gameObject;
-        //        HasTarget = true;
-        //    }
-
-        //    else
-        //    {
-        //        _checkTimer = _checkTimerCooldown;
-        //    }
-
-        //}
+        if (Target != null)
+        {
+            gameObject.transform.LookAt(Target.transform);
+            _shootPos = transform.position + (Target.transform.position - transform.position).normalized;
+            if (_timer <= 0)
+            {
+                TurretScript.Shoot(BulletPrefab, _shootPos, Target.transform.position, gameObject.transform.rotation, gameObject);
+                _timer = ShootTime;
+            }
+        }
 
 
 
@@ -124,5 +95,20 @@ public class AIScript : MonoBehaviour {
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 0.5f);
+        Gizmos.DrawWireSphere(transform.position, 2.5f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "AI" && other.gameObject.GetComponent<AIScript>() != null && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) Target = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == Target)
+        {
+            Target = null;
+        }
+
     }
 }

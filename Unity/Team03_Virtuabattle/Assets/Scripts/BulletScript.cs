@@ -7,6 +7,8 @@ public class BulletScript : MonoBehaviour {
     public string OriginName;
     public Vector3 Target;
 
+    public LayerMask IgnoreLayer;
+
     public Vector3 Origin { get; set; }
     public int ShootForce;
 
@@ -34,12 +36,18 @@ public class BulletScript : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == OriginName) return;
-        Debug.Log("collider");
-        if (other.tag == "AI")
+
+        
+        //Debug.Log("collider");
+        if (other.tag == "AI" && other.gameObject.layer != IgnoreLayer)
         {
             Debug.Log("damage");
-            other.GetComponent<AIScript>().health-=1;
-            Destroy(gameObject);
+            AIScript _help = other.GetComponent<AIScript>();
+            if (_help != null)
+            {
+                _help.health--;
+                Destroy(gameObject);
+            }
         }
         else if (other.tag == "Turret")
         {
