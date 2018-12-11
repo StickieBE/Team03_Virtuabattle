@@ -26,10 +26,10 @@ public class CameraController : MonoBehaviour {
     void UpdateCamera()
     {
         Vector3 rotation = CameraPivot.localEulerAngles;
-        rotation.y += inputController.CameraMovementHorizontal() * _speed;
+        rotation.y += inputController.CameraMovementHorizontal * _speed;
         CameraPivot.localEulerAngles = rotation;
         Vector3 rotationCameraPivot = CameraPivot.localEulerAngles;
-        rotationCameraPivot.x += inputController.CameraMovementVertical() * _speed;
+        rotationCameraPivot.x += inputController.CameraMovementVertical * _speed;
         rotationCameraPivot.x = CharController.ClampAngle(rotationCameraPivot.x, -30, 50);
         CameraPivot.localEulerAngles = rotationCameraPivot;
     }
