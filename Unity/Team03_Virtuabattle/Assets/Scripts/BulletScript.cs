@@ -1,69 +1,108 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
 
     public string OriginName;
-    public Vector3 Target;
+    public GameObject Target;
 
-    public LayerMask IgnoreLayer;
-
-    public Vector3 Origin { get; set; }
+    public GameObject Origin { get; set; }
     public int ShootForce;
 
     private float _time;
     private Vector3 _direction;
-	// Use this for initialization
-	void Start () {
-        _direction = (Target - Origin).normalized;
+
+    Rigidbody _rigidBody => GetComponent<Rigidbody>();
+
+    int team;
+
+    // Use this for initialization
+    void Start () {
+
+        Vector3 offset = Target.GetComponent<AIScript>() != null ? Target.GetComponent<AIScript>().Velocity : Vector3.zero;
+        _direction = (Target.transform.position + offset - Origin.transform.position).normalized;
         _time = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.GetComponent<Rigidbody>().velocity = _direction *ShootForce;
 
-        _time+=Time.deltaTime;
+        _rigidBody.velocity = _direction * ShootForce;
 
-        if (_time>=5)
-        {
-            Destroy(gameObject);
-        }
+        _time += Time.deltaTime;
+
+        if (_time >= 5) Destroy(gameObject);
 
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == OriginName) return;
+        if (other.gameObject == Origin || // Don't execute if bullet collides with own origin.
+            IsShootingFriendly(other.gameObject) // Don't execute if bullet collides with own team.
+        ) return;
 
-        
-        //Debug.Log("collider");
-        if (other.tag == "AI" && other.gameObject.layer != IgnoreLayer)
+        //Debug.Log(
+        //    string.Format(
+        //        "The bullet collided with {0} / {1} and came from {2} / {3}",
+        //        other.tag,
+        //        other.gameObject.name,
+        //        Origin.tag,
+        //        Origin.name
+        //    )
+        //);
+
+        switch (other.tag)
         {
-            Debug.Log("damage");
-            AIScript _help = other.GetComponent<AIScript>();
-            if (_help != null)
-            {
-                _help.health--;
-                Destroy(gameObject);
-            }
-        }
-        else if (other.tag == "Turret")
-        {
-            Debug.Log("turret");
-            other.GetComponent<TurretScript>().Health -= 1;
-            Destroy(gameObject);
-        }
-        else if (other.tag == "Bullet")
-        {
-            Debug.Log("Bullet");
-        }
-        else
-        {
-            Debug.Log(other.tag);
-            Destroy(gameObject);
+            case "Tank":
+                AIScript _theScript = other.GetComponent<AIScript>()??null;
+                //if (_theScript == null) _theScript = other.GetComponentInParent<AIScript>() ?? null;
+                other.GetComponent<AIScript>().Health--;
+                break;
+            case "Turret":
+                other.GetComponent<TurretScript>().Health -= 1;
+                break;
+            default:
+                break;
         }
 
+        Destroy(gameObject);
+
+    }
+
+    private bool IsShootingFriendly(GameObject _collider)
+    {
+        int _numberToCheck = FindTeamNumberOfObject(_collider);
+        //if (_numberToCheck == 0) Debug.Break();
+        return (_numberToCheck == team);
+    }
+
+    private int FindTeamNumberOfObject(GameObject collider)
+    {
+        return collider.GetComponent<AIScript>() != null ? collider.GetComponent<AIScript>().TeamNumber :
+            collider.GetComponent<TurretScript>() != null ? collider.GetComponent<TurretScript>().TeamNumber : 0;
+    }
+
+    public void Shoot(GameObject target, GameObject barrel, int _team)
+    {
+        Target = target;
+
+        //GameObject.FindGameObjectWithTag("Player").transform.position = Target.transform.position;
+
+        Origin = barrel;
+        team = _team;
+
+        //Debug.Log(
+        //    string.Format(
+        //        "Bullet details: POS: {0} / {1} / {2} / {3}",
+        //        transform,
+        //        target,
+        //        barrel,
+        //        team
+        //    )
+        //);
+
+        //Debug.Break();
     }
 }

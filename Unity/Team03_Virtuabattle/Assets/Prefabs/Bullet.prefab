@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4254902735339752}
   - component: {fileID: 198273393624854534}
   - component: {fileID: 199683516648827108}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 135232630617107878}
   - component: {fileID: 114900065990671104}
   - component: {fileID: 54233760290987806}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -144,10 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginName: 
-  Target: {x: 0, y: 0, z: 0}
-  IgnoreLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  Target: {fileID: 0}
   ShootForce: 25
 --- !u!135 &135232630617107878
 SphereCollider:
