@@ -33,8 +33,7 @@ public class SpawnUnitsScript : MonoBehaviour {
     void Start ()
     {
         variableController = GetComponent<VariableController>();
-
-        _gameControl = GameObject.Find("LevelController").GetComponent<AIPathControl>();
+        _gameControl = LevelController.Instance.GetComponent<AIPathControl>();
 
         //GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
 
@@ -62,11 +61,12 @@ public class SpawnUnitsScript : MonoBehaviour {
     {
         if (_timer <= 0)
         {
-        Debug.Log("Spawn");
+            //#if DEBUG
+            //Debug.Log("Spawn");
+            //#endif
             _lastSpawnedUnit = Instantiate(_unitPrefab, _tempSpawnPos, Quaternion.identity);
             //_lastSpawnedUnit.GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
             _lastSpawnedUnit.GetComponent<AIScript>().TeamNumber = TeamNumber;
-            _lastSpawnedUnit.GetComponent<AIScript>().SpawnPoints = _gameControl.TeamSpawnPoints;
             _timer = CoolDownTime;
         }
     }
