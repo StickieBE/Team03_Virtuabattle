@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class AIScript : MonoBehaviour {
 
-    public int TeamNumber;
-    public float health;
+    public GameObject Barrel { get; set; }
+    public int TeamNumber { get; set; }
+    public Vector3 Velocity { get; set; }
 
-    [HideInInspector]
-    public Transform[] SpawnPoints;
+    public float Health;
+
+    GameObject[] spawnPoints;
 
     private Collider[] _enemies;
 
@@ -29,12 +31,16 @@ public class AIScript : MonoBehaviour {
     public float _checkTimerCooldown;
     public GameObject BulletPrefab;
 
+    private void Awake()
+    {
+        spawnPoints = LevelController.Instance.Spawns;
+    }
+
 
     // Use this for initialization
     void Start () {
 
         _timer = ShootTime;
-
 
         _rndPathNumber = Random.Range(0, 4);
 
@@ -43,23 +49,21 @@ public class AIScript : MonoBehaviour {
             _rndPathNumber = Random.Range(0, 4);
         }
 
-        transform.position = SpawnPoints[TeamNumber - 1].position;
-        _destination = SpawnPoints[_rndPathNumber];
-
+        transform.position = spawnPoints[TeamNumber - 1].transform.position;
+        _destination = spawnPoints[_rndPathNumber].transform;
 
         _agent = GetComponent<NavMeshAgent>();
         _agent.destination = _destination.position;
-        //gameObject.layer = TeamNumber + 9;
+        _agent.speed = 10;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        
+        Velocity = _agent.velocity;
 
-        if (health <=0)
-        { Destroy(gameObject); }
+        if (Health <= 0) Destroy(gameObject);
 
         _timer -= Time.deltaTime;
 
@@ -70,13 +74,11 @@ public class AIScript : MonoBehaviour {
             _shootPos = transform.position + (Target.transform.position - transform.position).normalized;
             if (_timer <= 0)
             {
-                TurretScript.Shoot(BulletPrefab, _shootPos, Target.transform.position, gameObject.transform.rotation, gameObject);
+                GameObject Bullet = Instantiate(BulletPrefab, transform.position, Barrel.transform.rotation);
+                Bullet.GetComponent<BulletScript>().Shoot(Target, Barrel, TeamNumber);
                 _timer = ShootTime;
             }
         }
-
-
-
 
         if (Vector3.Distance(_agent.destination, _agent.transform.position) <=0.3f)
         {
@@ -89,14 +91,11 @@ public class AIScript : MonoBehaviour {
         }
 	}
 
-
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, 0.5f);
-        Gizmos.DrawWireSphere(transform.position, 2.5f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, 0.5f);
+    //    Gizmos.DrawWireSphere(transform.position, 2.5f);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
