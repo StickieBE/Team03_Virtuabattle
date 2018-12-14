@@ -4,53 +4,238 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretScript : MonoBehaviour {
-    public GameObject Head;
-    public GameObject Base;
-    public Collider[] Enemies;
+
+    // Turret parts
+    public GameObject Barrel { get; set; }
+    GameObject turretHead, turretBase;
+    Transform defaultHeadPosition;
+
+    // Team-related
+    public int TeamNumber { get; set; }
+    public Color TurretColor;
+
+    // Easy to read code
+    bool HasTarget => ((_target == null) ? false : true);
+    bool EnemiesNear => (_enemies.Count > 0);
+
+    // Shooting-related
     public GameObject BulletPrefab;
-    public int TeamNumber;
+    private List<GameObject> _enemies = new List<GameObject>();
+    GameObject _target;
+    public float ShootTime;
+    private float Timer;
+    public LayerMask RaycastIgnoreLayer;
+    bool headRotationReset = true;
+
+    // Turret variables
     public bool Captured;
     public int Health;
 
-    private List<Collider> _enemies = new List<Collider>();
+    //private LayerMask _layermask;
 
-    public Vector3 SpawnPosition { get; private set; }
+    private void Awake()
+    {
+        FindAllTurretParts();
+    }
 
-    public Material[] TurretColor;
-    private LayerMask _layermask;
-
-    GameObject _target;
-
-    private Vector3 _spawnPosition;
-
-    public float ShootTime;
-    private float Timer;
     // Use this for initialization
     void Start () {
+        //if (TeamNumber != 2) Destroy(gameObject);
         Timer = ShootTime;
         Captured = false;
+        defaultHeadPosition = turretHead.transform;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        SpawnPosition = Head.transform.TransformPoint(Vector3.forward * 1.5f);
 
         Timer -= Time.deltaTime;
 
-        if (_target != null && _enemies.Contains(_target.GetComponent<Collider>()) && Timer <=0)
+        if (EnemiesNear) HandleCombat();
+        else
         {
-            Head.transform.LookAt(_target.transform);
-            Shoot(BulletPrefab, SpawnPosition, _target.transform.position, Head.transform.rotation, gameObject);
-            Timer = ShootTime;
-        }
-        else if (_enemies.Count > 0)
-        {
-            _target = _enemies[0].gameObject;
+            //#if DEBUG
+            //            Debug.Log(
+            //                string.Format(
+            //                    "{0} enemies near, scanning...",
+            //                    _enemies.Count
+            //                )
+            //            );
+            //#endif
+            if (!headRotationReset && !HasTarget) ResetHead();
         }
         //CheckCaptured();
 
+    }
 
+    private void FindAllTurretParts()
+    {
+        foreach (Transform _turretPart in GetComponentInChildren<Transform>())
+        {
+            switch (_turretPart.name)
+            {
+                case ("Base"):
+                    turretBase = _turretPart.gameObject;
+                    break;
+                case ("Head"):
+                    turretHead = _turretPart.gameObject;
+                    break;
+                case ("Barrel"):
+                    Barrel = _turretPart.gameObject;
+                    break;
+                default:
+                    break;
+            }
+        }
+        foreach (Transform _turretPart in turretHead.GetComponentInChildren<Transform>())
+            if (_turretPart.name == "Barrel") Barrel = _turretPart.gameObject;
+    }
 
+    private void HandleCombat()
+    {
+        if (HasTarget)
+        {
+            //#if DEBUG
+            //            Debug.Log(
+            //                string.Format(
+            //                    "{0} enemies near, focussing {1}",
+            //                    _enemies.Count,
+            //                    _target
+            //                )
+            //            );
+            //#endif
+            FocusTarget();
+            //FilterTargetsBehindWalls();
+            if (Timer <= 0) ShootTarget();
+        }
+        else
+        {
+            if (EnemiesNear) FindTarget();
+        }
+    }
+
+    private void FilterTargetsBehindWalls()
+    {
+        for (int i = 0; i < _enemies.Count; i++)
+        {
+            GameObject _enemyToCheck = _enemies[i];
+            //Debug.Log(_enemyToCheck);
+            if (_enemyToCheck != null)
+                if (!RayCastCheck(_enemyToCheck)) RemoveEnemyFromList(i);
+        }
+    }
+
+    private void RemoveEnemyFromList(int i)
+    {
+        Debug.Log("Removing enemy behind walls");
+        _enemies.RemoveAt(i);
+    }
+
+    private bool RayCastCheck(GameObject enemyToCheck)
+    { 
+        Vector3 _origin = Barrel.transform.position, _direction = Barrel.transform.forward, _enemy = enemyToCheck.transform.position;
+        float _traceLength = Vector3.Distance(_origin, _enemy);
+
+        RaycastHit hit;
+        Physics.Raycast(_origin, _direction, out hit, _traceLength, ~RaycastIgnoreLayer);
+        Debug.DrawRay(_origin, _direction, Color.red, 10f);
+
+        //Debug.Log(
+        //    string.Format(
+        //        "Raycast hit gameobject {0} with tag {1} and had a length of {2}",
+        //        hit.transform.gameObject,
+        //        hit.transform.gameObject.tag,
+        //        _traceLength
+        //    )
+        //);
+
+        if (hit.collider != null)
+            if (hit.transform.gameObject.tag == "Tank")
+                return true;
+        return false;
+    }
+
+    private void FindTarget()
+    {
+        //Debug.Log("Looking for target");
+         _target = _enemies[0];
+    }
+
+    private void ResetHead()
+    {
+        //Debug.Log("Reset turret head to default position");
+        headRotationReset = true;
+        turretHead.transform.LookAt(defaultHeadPosition.forward);
+    }
+
+    private void FocusTarget()
+    {
+        //Debug.Log("Focussing target");
+        headRotationReset = false;
+        turretHead.transform.LookAt(_target.transform);
+    }
+
+    private void ShootTarget()
+    {
+        //Debug.Log("Shooting at target");
+        GameObject Bullet = Instantiate(BulletPrefab, Barrel.transform.position, Barrel.transform.rotation);
+        Bullet.GetComponent<BulletScript>().Shoot(_target, Barrel, TeamNumber);
+        Timer = ShootTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject _gameObject = other.gameObject;
+        if (IsValidEnemy(_gameObject))
+        {
+            if (!CheckIfAlreadyAdded(_gameObject))
+            {
+                _enemies.Add(_gameObject);
+                //Debug.Log(
+                //    string.Format(
+                //        "Added enemy {0} with tag {1}",
+                //        _gameObject,
+                //        _gameObject.tag
+                //    )
+                //);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        GameObject _gameObject = other.gameObject;
+        if (IsValidEnemy(_gameObject))
+        {
+            if (CheckIfAlreadyAdded(_gameObject))
+            {
+                if (_target == _gameObject) _target = null;
+                _enemies.Remove(_gameObject);
+                //Debug.Log(
+                //    string.Format(
+                //        "Removed enemy {0} with tag {1}",
+                //        _gameObject,
+                //        _gameObject.tag
+                //    )
+                //);
+            }
+        }
+    }
+
+    private bool IsValidEnemy(GameObject _collider)
+    {
+        return (
+            _collider.tag == "Tank"
+            && _collider.GetComponent<AIScript>() != null
+            && _collider.GetComponent<AIScript>().TeamNumber != TeamNumber
+        );
+    }
+
+    private bool CheckIfAlreadyAdded(GameObject collider)
+    {
+        for (int i = 0; i < _enemies.Count; i++)
+            if (collider == _enemies[i]) return true;
+        return false;
     }
 
     private void CheckCaptured()
@@ -97,29 +282,16 @@ public class TurretScript : MonoBehaviour {
         //}
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(Base.transform.position, 5);
-        Gizmos.color = Color.red;
-        //foreach (Collider enemy in Enemies)
-        //{
-        //    if (enemy != null) Gizmos.DrawWireSphere(enemy.transform.position, 0.6f);
-        //}
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(turretBase.transform.position, 5);
+    //    Gizmos.color = Color.red;
+    //    foreach (GameObject enemy in _enemies)
+    //    {
+    //        if (enemy != null) Gizmos.DrawWireSphere(enemy.transform.position, 0.6f);
+    //    }
 
-    }
-
-    public static void Shoot(GameObject Projectile, Vector3 SpawnPos, Vector3 Target, Quaternion Rotation, GameObject _go)
-    {
-
-        GameObject Bullet = Instantiate(Projectile, SpawnPos, Rotation);
-
-        BulletScript _bulletScript = Bullet.GetComponent<BulletScript>();
-
-        _bulletScript.Target = Target;
-        _bulletScript.Origin = SpawnPos;
-        _bulletScript.OriginName = _go.tag;
-
-    }
+    //}
 
     //public static LayerMask DefineLayerMask(int ObjectTeamNumber)
     //{
@@ -144,15 +316,5 @@ public class TurretScript : MonoBehaviour {
     //    }
     //    return Layermask;
     //}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "AI" && other.gameObject.GetComponent<AIScript>() != null && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) _enemies.Add(other);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        _enemies.Remove(other);
-    }
 
 }
