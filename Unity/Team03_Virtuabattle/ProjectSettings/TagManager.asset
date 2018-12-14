@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AI
   - SpawnPillar
   - Turret
   - Bullet
+  - Tank
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - 
   - PostProcessing
   - CastLayer
-  - IgnoreLayer
+  - TurretRayCastIgnore
   - 
   - 
   - 
