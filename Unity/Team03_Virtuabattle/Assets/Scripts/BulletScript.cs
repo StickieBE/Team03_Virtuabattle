@@ -39,8 +39,9 @@ public class BulletScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == Origin || // Don't execute if bullet collides with own origin.
-            IsShootingFriendly(other.gameObject) // Don't execute if bullet collides with own team.
+        if (other.gameObject == Origin // Don't execute if bullet collides with own origin.
+            || IsShootingFriendly(other.gameObject) // Don't execute if bullet collides with own team.
+            || other.isTrigger // Don't execute if the collider is detection trigger.
         ) return;
 
         //Debug.Log(
