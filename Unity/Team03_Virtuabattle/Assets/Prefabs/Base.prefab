@@ -681,7 +681,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1368258107258146}
   m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 138.6, y: 1, z: 136.1}
+  m_LocalPosition: {x: 138.6, y: -0.44, z: 136.1}
   m_LocalScale: {x: 40, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 4537642383548866}
@@ -1954,12 +1954,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TurretColor: {r: 0, g: 0, b: 0, a: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
+  ShootTime: 0.5
+  RaycastIgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Captured: 0
   Health: 50
-  TurretColor: []
-  ShootTime: 0.5
 --- !u!114 &114626138899159272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1987,12 +1990,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TurretColor: {r: 0, g: 0, b: 0, a: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
+  ShootTime: 0.5
+  RaycastIgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Captured: 0
   Health: 50
-  TurretColor: []
-  ShootTime: 0.5
 --- !u!114 &114752727168409262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2016,12 +2022,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TurretColor: {r: 0, g: 0, b: 0, a: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
+  ShootTime: 0.5
+  RaycastIgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Captured: 0
   Health: 50
-  TurretColor: []
-  ShootTime: 0.5
 --- !u!114 &114896295282334850
 MonoBehaviour:
   m_ObjectHideFlags: 1

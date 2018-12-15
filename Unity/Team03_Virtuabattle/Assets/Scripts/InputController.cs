@@ -44,8 +44,27 @@ public class InputController : MonoBehaviour {
                     SpawnUnitsScript _spawner = _hitObject.GetComponent<SpawnUnitsScript>();
                     if (_spawner.TeamNumber == variableController.Player) _spawner.SpawnUnit();
                 }
+                if (_hitObject.tag == "Turret")
+                {
+                    TurretScript _turret = _hitObject.GetComponent<TurretScript>();
+                    if (_turret.Captured == false) _turret.Capture(playerNumber);
+                }
             }
             Debug.DrawRay(transform.position, _cameraTransform.forward, Color.red, 100);
+        }
+
+        if (ActionPressed)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, _cameraTransform.forward, out hit, 10, CastLayer))
+            {
+                GameObject _hitObject = hit.transform.gameObject;
+                if (_hitObject.tag == "Turret")
+                {
+                    TurretScript _turret = _hitObject.GetComponent<TurretScript>();
+                    if (_turret.Captured == false) _turret.Capture(playerNumber);
+                }
+            }
         }
     }
 

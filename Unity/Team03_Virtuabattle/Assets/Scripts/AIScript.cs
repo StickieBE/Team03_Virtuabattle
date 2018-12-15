@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 public class AIScript : MonoBehaviour {
 
-    public GameObject Barrel { get; set; }
+    public GameObject Barrel;
     public int TeamNumber { get; set; }
     public Vector3 Velocity { get; set; }
+    
 
     public float Health;
 
@@ -34,12 +35,13 @@ public class AIScript : MonoBehaviour {
     private void Awake()
     {
         spawnPoints = LevelController.Instance.Spawns;
+
     }
 
 
     // Use this for initialization
     void Start () {
-
+        GetComponent<Renderer>().material = LevelController.Instance.TeamColors[TeamNumber - 1];
         _timer = ShootTime;
 
         _rndPathNumber = Random.Range(0, 4);
@@ -99,7 +101,7 @@ public class AIScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "AI" && other.gameObject.GetComponent<AIScript>() != null && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) Target = other.gameObject;
+        if (other.tag == "Tank" && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber && Target == null) Target = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)

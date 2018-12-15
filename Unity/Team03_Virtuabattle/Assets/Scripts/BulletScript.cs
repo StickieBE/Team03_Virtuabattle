@@ -33,7 +33,7 @@ public class BulletScript : MonoBehaviour {
 
         _time += Time.deltaTime;
 
-        if (_time >= 5) Destroy(gameObject);
+        //if (_time >= 5) Destroy(gameObject);
 
 	}
 

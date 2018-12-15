@@ -10,7 +10,12 @@ public class BaseController : MonoBehaviour {
 	void Start () {
 
         foreach (TurretScript _ts in GetComponentsInChildren<TurretScript>())
+        {
             _ts.TeamNumber = TeamNumber;
+            _ts.Captured = true;
+            _ts.turretHead.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[TeamNumber-1];
+        }
+
 
 	}
 	

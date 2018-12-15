@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33891831849455476}
   - component: {fileID: 23467356305499660}
   - component: {fileID: 136202959935019568}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4141113472192280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4267524494734534}
   - component: {fileID: 33826247382747942}
   - component: {fileID: 23758796420372144}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 33444958038301552}
   - component: {fileID: 23050779477319936}
   - component: {fileID: 136783730969222796}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 114150031181758552}
   - component: {fileID: 135731573351438174}
   - component: {fileID: 114761455029082100}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4789680933402910}
   - component: {fileID: 33360991977951404}
   - component: {fileID: 23471744420562902}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -377,10 +377,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurretColor: {r: 0, g: 0, b: 0, a: 0}
+  turretHead: {fileID: 0}
+  turretBase: {fileID: 0}
+  TeamNumber: 0
+  TurretMaterial: {fileID: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
-  ShootTime: 0.5
+  _enemies: []
+  ShootTime: 0.33
   RaycastIgnoreLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -411,7 +415,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136050167254449456
 CapsuleCollider:
