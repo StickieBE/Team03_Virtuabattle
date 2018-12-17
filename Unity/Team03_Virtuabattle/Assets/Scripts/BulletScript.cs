@@ -3,26 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BulletScript : MonoBehaviour {
 
-    public string OriginName;
-    public GameObject Target;
+    #region Fields
 
-    public GameObject Origin { get; set; }
+    //-------------- Public
+    public string OriginName;
     public int ShootForce;
 
-    private float _time;
-    private Vector3 _direction;
-
-    Rigidbody _rigidBody => GetComponent<Rigidbody>();
-
+    //-------------- Private
     int team;
+    GameObject _target;
+    Rigidbody _rigidBody => GetComponent<Rigidbody>();
+    float _time;
+    Vector3 _direction;
+
+    #endregion
+
+    #region Properties
+
+    public GameObject Origin { get; set; }
+
+    #endregion
+
+    #region Methods
 
     // Use this for initialization
     void Start () {
 
-        Vector3 offset = Target.GetComponent<AIScript>() != null ? Target.GetComponent<AIScript>().Velocity : Vector3.zero;
-        _direction = (Target.transform.position + offset - Origin.transform.position).normalized;
+        if (_target != null)
+        {
+            Vector3 offset = _target.GetComponent<AIScript>() != null ? _target.GetComponent<AIScript>().Velocity : Vector3.zero;
+            _direction = (_target.transform.position + offset - Origin.transform.position).normalized;
+        }
+        else
+        {
+            _direction = transform.forward;
+        }
         _time = 0;
 	}
 	
@@ -64,6 +82,9 @@ public class BulletScript : MonoBehaviour {
             case "Turret":
                 other.GetComponent<TurretScript>().Health -= 1;
                 break;
+            case "Player":
+                other.GetComponent<VariableController>().RemoveHP(1);
+                break;
             default:
                 break;
         }
@@ -87,7 +108,7 @@ public class BulletScript : MonoBehaviour {
 
     public void Shoot(GameObject target, GameObject barrel, int _team)
     {
-        Target = target;
+        _target = target;
 
         //GameObject.FindGameObjectWithTag("Player").transform.position = Target.transform.position;
 
@@ -106,4 +127,13 @@ public class BulletScript : MonoBehaviour {
 
         //Debug.Break();
     }
+
+    public void ShootStraight(GameObject player, int _team)
+    {
+        Origin = player;
+        team = _team;
+    }
+
+    #endregion
+
 }
