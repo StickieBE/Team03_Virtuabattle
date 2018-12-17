@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class SpawnUnitsScript : MonoBehaviour {
 
-    VariableController variableController;
+    #region Fields
 
-    public int TeamNumber;
+    //----- Public
     public float CoolDownTime;
-    private float _timer;
-    private GameObject _lastSpawnedUnit;
-
-    private AIPathControl _gameControl;
-
     public enum TroopType
     {
         Land,
@@ -20,14 +15,27 @@ public class SpawnUnitsScript : MonoBehaviour {
         Other
     }
     public TroopType troopType;
-
     public GameObject LandPrefab;
+    public Vector3 _tempSpawnPos;
     //public GameObject SkyPrefab;
 
-    private GameObject _unitPrefab;
-    //private int _goldCost;
+    //----- Private
+    VariableController variableController;
+    float _timer;
+    GameObject _lastSpawnedUnit;
+    AIPathControl _gameControl;
+    GameObject _unitPrefab;
+    //int _goldCost;
 
-    public Vector3 _tempSpawnPos;
+    #endregion
+
+    #region Properties
+
+    public int TeamNumber { get; set; }
+
+    #endregion
+
+    #region Methods
 
     // Use this for initialization
     void Start ()
@@ -36,7 +44,6 @@ public class SpawnUnitsScript : MonoBehaviour {
         _gameControl = LevelController.Instance.GetComponent<AIPathControl>();
 
         //GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
-
 
         if (troopType == TroopType.Land)
         {
@@ -70,4 +77,6 @@ public class SpawnUnitsScript : MonoBehaviour {
             _timer = CoolDownTime;
         }
     }
+
+    #endregion
 }

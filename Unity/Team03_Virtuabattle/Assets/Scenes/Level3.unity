@@ -736,6 +736,11 @@ Prefab:
       propertyPath: m_Name
       value: Spawn_2
       objectReference: {fileID: 0}
+    - target: {fileID: 114626138899159272, guid: 6e6b6bea2690c54409eb7bc6baa90652,
+        type: 2}
+      propertyPath: TeamNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e6b6bea2690c54409eb7bc6baa90652, type: 2}
   m_IsPrefabAsset: 0
@@ -951,7 +956,7 @@ Prefab:
     - target: {fileID: 114906297216262808, guid: e60c3957eb2e2d5479a37e71a6099941,
         type: 2}
       propertyPath: AmountOfPlayers
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114906297216262808, guid: e60c3957eb2e2d5479a37e71a6099941,
         type: 2}
@@ -1032,6 +1037,11 @@ Prefab:
       propertyPath: RaycastIgnoreLayer.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 114626138899159272, guid: 6e6b6bea2690c54409eb7bc6baa90652,
+        type: 2}
+      propertyPath: TeamNumber
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e6b6bea2690c54409eb7bc6baa90652, type: 2}
   m_IsPrefabAsset: 0
@@ -1110,6 +1120,11 @@ Prefab:
         type: 2}
       propertyPath: RaycastIgnoreLayer.m_Bits
       value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 114626138899159272, guid: 6e6b6bea2690c54409eb7bc6baa90652,
+        type: 2}
+      propertyPath: TeamNumber
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e6b6bea2690c54409eb7bc6baa90652, type: 2}
