@@ -29,7 +29,7 @@ public class TurretScript : MonoBehaviour {
 
     // Turret variables
     public bool Captured;
-    public int Health;
+    public int Health = 50;
 
     //private LayerMask _layermask;
 
@@ -236,6 +236,11 @@ public class TurretScript : MonoBehaviour {
         for (int i = 0; i < _enemies.Count; i++)
             if (collider == _enemies[i]) return true;
         return false;
+    }
+
+    public void RemoveHP(int amount)
+    {
+        Health -= amount;
     }
 
     private void CheckCaptured()
