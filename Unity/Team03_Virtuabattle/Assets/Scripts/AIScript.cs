@@ -110,4 +110,9 @@ public class AIScript : MonoBehaviour {
         }
 
     }
+
+    public void RemoveHP(int amount)
+    {
+        Health -= amount;
+    }
 }

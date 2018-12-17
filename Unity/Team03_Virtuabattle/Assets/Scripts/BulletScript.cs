@@ -77,10 +77,10 @@ public class BulletScript : MonoBehaviour {
             case "Tank":
                 AIScript _theScript = other.GetComponent<AIScript>()??null;
                 //if (_theScript == null) _theScript = other.GetComponentInParent<AIScript>() ?? null;
-                other.GetComponent<AIScript>().Health--;
+                other.GetComponent<AIScript>().RemoveHP(1);
                 break;
             case "Turret":
-                other.GetComponent<TurretScript>().Health -= 1;
+                other.GetComponent<TurretScript>().RemoveHP(1);
                 break;
             case "Player":
                 other.GetComponent<VariableController>().RemoveHP(1);
