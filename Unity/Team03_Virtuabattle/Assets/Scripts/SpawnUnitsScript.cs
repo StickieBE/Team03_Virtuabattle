@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class SpawnUnitsScript : MonoBehaviour {
 
-    VariableController variableController;
+    #region Fields
 
-    public int TeamNumber;
+    //----- Public
     public float CoolDownTime;
-    private float _timer;
-    private GameObject _lastSpawnedUnit;
-
-    //private AIPathControl _gameControl;
-
     public enum TroopType
     {
         Land,
@@ -20,25 +15,35 @@ public class SpawnUnitsScript : MonoBehaviour {
         Other
     }
     public TroopType troopType;
-
     public GameObject LandPrefab;
+    public Vector3 _tempSpawnPos;
     //public GameObject SkyPrefab;
 
-    private GameObject _unitPrefab;
-    //private int _goldCost;
+    //----- Private
+    VariableController variableController;
+    float _timer;
+    GameObject _lastSpawnedUnit;
+    AIPathControl _gameControl;
+    GameObject _unitPrefab;
+    //int _goldCost;
 
-    public Vector3 _tempSpawnPos;
+    #endregion
+
+    #region Properties
+
+    public int TeamNumber { get; set; }
+
+    #endregion
+
+    #region Methods
 
     // Use this for initialization
     void Start ()
     {
         variableController = GetComponent<VariableController>();
-
-        //_gameControl = GameObject.Find("Game Control").GetComponent<AIPathControl>();
+        _gameControl = LevelController.Instance.GetComponent<AIPathControl>();
 
         //GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
-
-        //_tempSpawnPos = _gameControl.TeamSpawnPoints[TeamNumber - 1].position;
 
         if (troopType == TroopType.Land)
         {
@@ -63,11 +68,15 @@ public class SpawnUnitsScript : MonoBehaviour {
     {
         if (_timer <= 0)
         {
+            //#if DEBUG
+            //Debug.Log("Spawn");
+            //#endif
             _lastSpawnedUnit = Instantiate(_unitPrefab, _tempSpawnPos, Quaternion.identity);
-            //_lastSpwanedUnit.GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
-            //_lastSpwanedUnit.GetComponent<AIScript>().TeamNumber = TeamNumber;
-            //_lastSpwanedUnit.GetComponent<AIScript>().SpawnPoints = _gameControl.TeamSpawnPoints;
+            //_lastSpawnedUnit.GetComponent<Renderer>().material = _gameControl.TeamMaterials[TeamNumber - 1];
+            _lastSpawnedUnit.GetComponent<AIScript>().TeamNumber = TeamNumber;
             _timer = CoolDownTime;
         }
     }
+
+    #endregion
 }

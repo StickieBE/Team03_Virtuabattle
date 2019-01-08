@@ -3,28 +3,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(VariableController))]
 public class InputController : MonoBehaviour {
 
+
+    #region Fields
+
+    //---------- Private
     VariableController variableController;
+    public GameObject Barrel { get; set; }
     int playerNumber;
     Transform _cameraTransform;
+    public GameObject BulletPrefab;
 
+    //---------- Public
     public LayerMask CastLayer;
+
+    // Action-related
+    public bool ActionPressed => Input.GetButton("ButtonSquare" + playerNumber);
+    public bool Action => Input.GetButtonDown("ButtonSquare" + playerNumber);
+    public bool JumpPressed => Input.GetButton("ButtonCross" + playerNumber);
+    public bool Jump => Input.GetButtonDown("ButtonCross" + playerNumber);
+    public bool IsShooting => Input.GetButton("R1" + playerNumber);
+    public bool Shoot => Input.GetButtonDown("R1" + playerNumber);
+    float _timer = .25f;
+
+    // Movement-related
+    public float PlayerMovementHorizontal => Input.GetAxis("LeftStickHorizontal" + playerNumber);
+    public float PlayerMovementVertical => Input.GetAxis("LeftStickVertical" + playerNumber);
+
+    // Camera-related
+    public float CameraMovementHorizontal => Input.GetAxis("RightStickHorizontal" + playerNumber);
+    public float CameraMovementVertical => Input.GetAxis("RightStickVertical" + playerNumber);
+
+    #endregion
+
+    #region Methods
 
     void Start()
     {
         variableController = GetComponent<VariableController>();
         playerNumber = variableController.Player;
-        
         _cameraTransform = GetComponentInChildren<Camera>().transform;
+        foreach (Transform _t in GetComponentsInChildren<Transform>())
+            if (_t.name == "Barrel") Barrel = _t.gameObject;
     }
 
     // Update is called once per frame
     void Update ()
     {
+        _timer -= Time.deltaTime;
+
         //DebugInput();
 
-        if (IsAction())
+        if (Action)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, _cameraTransform.forward, out hit, 10, CastLayer))
@@ -38,6 +71,14 @@ public class InputController : MonoBehaviour {
             }
             Debug.DrawRay(transform.position, _cameraTransform.forward, Color.red, 100);
         }
+        if (IsShooting && _timer <= 0) ShootPrimary();
+    }
+
+    private void ShootPrimary()
+    {
+        GameObject _bullet = Instantiate(BulletPrefab, Barrel.transform.position, Barrel.transform.rotation);
+        _bullet.GetComponent<BulletScript>().ShootStraight(gameObject, playerNumber);
+        _timer = .25f;
     }
 
     void DebugInput()
@@ -76,79 +117,5 @@ public class InputController : MonoBehaviour {
         Debug.Log("Player " + playerNumber + " is moving " + _direction + " using " + v2);
     }
 
-    public float PlayerMovementHorizontal()
-    {
-        return Input.GetAxis("LeftStickHorizontal" + playerNumber);
-        //return Input.GetAxisRaw("LeftStickHorizontal" + playerNumber); // No smoothing
-    }
-
-    public float PlayerMovementVertical()
-    {
-        return Input.GetAxis("LeftStickVertical" + playerNumber);
-        //return Input.GetAxisRaw("LeftStickVertical" + playerNumber); // No smoothing
-    }
-
-    public bool IsJumping()
-    {
-        return Input.GetButtonDown("ButtonCross" + playerNumber);
-    }
-
-    public bool IsAction()
-    {
-        return Input.GetButtonDown("ButtonSquare" + playerNumber);
-    }
-
-    //public bool PlayerMovingLeft()
-    //{
-    //    return (Input.GetAxisRaw("LeftStickHorizontal" + playerNumber) > 0 || Input.GetAxisRaw("DPADHorizontal" + playerNumber) > 0) ? true : false;
-    //}
-
-    //public bool PlayerMovingRight()
-    //{
-    //    return (Input.GetAxisRaw("LeftStickHorizontal" + playerNumber) < 0 || Input.GetAxisRaw("DPADHorizontal" + playerNumber) < 0) ? true : false;
-    //}
-
-    //public bool PlayerMovingForward()
-    //{
-    //    return (Input.GetAxisRaw("LeftStickVertical" + playerNumber) > 0 || Input.GetAxisRaw("DPADVertical" + playerNumber) > 0) ? true : false;
-    //}
-
-    //public bool PlayerMovingBackwards()
-    //{
-    //    return (Input.GetAxisRaw("LeftStickVertical" + playerNumber) < 0 || Input.GetAxisRaw("DPADVertical" + playerNumber) < 0) ? true : false;
-    //}
-
-    // Camera-related
-
-    //public bool CameraMovingLeft()
-    //{
-    //    return (Input.GetAxisRaw("RightStickHorizontal" + playerNumber) > 0) ? true : false;
-    //}
-
-    //public bool CameraMovingRight()
-    //{
-    //    return (Input.GetAxisRaw("RightStickHorizontal" + playerNumber) < 0) ? true : false;
-    //}
-
-    //public bool CameraMovingForward()
-    //{
-    //    return (Input.GetAxisRaw("RightStickVertical" + playerNumber) > 0) ? true : false;
-    //}
-
-    //public bool CameraMovingBackwards()
-    //{
-    //    return (Input.GetAxisRaw("RightStickVertical" + playerNumber) < 0) ? true : false;
-    //}
-
-    public float CameraMovementHorizontal()
-    {
-        return Input.GetAxis("RightStickHorizontal" + playerNumber);
-        //return Input.GetAxisRaw("RightStickHorizontal" + playerNumber); No smoothing
-    }
-
-    public float CameraMovementVertical()
-    {
-        return Input.GetAxis("RightStickVertical" + playerNumber);
-        //return Input.GetAxisRaw("RightStickVertical" + playerNumber); No smoothing
-    }
+    #endregion
 }
