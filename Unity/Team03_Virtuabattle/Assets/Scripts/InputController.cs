@@ -71,7 +71,26 @@ public class InputController : MonoBehaviour {
             }
             Debug.DrawRay(transform.position, _cameraTransform.forward, Color.red, 100);
         }
+
         if (IsShooting && _timer <= 0) ShootPrimary();
+
+        if (ActionPressed)
+        {
+
+            Debug.Log("ActionPressed");
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, _cameraTransform.forward, out hit, 100, CastLayer))
+            {
+                GameObject _hitObject = hit.transform.gameObject;
+                if (_hitObject.tag == "Turret")
+                {
+                    TurretScript _turret = _hitObject.GetComponent<TurretScript>();
+                    if (_turret.Captured == false) _turret.Capture(playerNumber);
+                }
+                Debug.DrawRay(transform.position, _cameraTransform.forward, Color.red, 100);
+            }
+        }
     }
 
     private void ShootPrimary()

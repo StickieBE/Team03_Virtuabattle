@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AIScript : MonoBehaviour {
 
-    public GameObject Barrel { get; set; }
+    public GameObject Barrel;
     public int TeamNumber { get; set; }
     public Vector3 Velocity { get; set; }
 
@@ -39,6 +39,7 @@ public class AIScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
 
         _timer = ShootTime;
 
