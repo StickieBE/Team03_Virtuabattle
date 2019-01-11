@@ -81,16 +81,18 @@ public class AIScript : MonoBehaviour {
             }
         }
 
-        if (Vector3.Distance(_agent.destination, _agent.transform.position) <=0.3f)
+        if (Vector3.Distance(_agent.destination, _agent.transform.position) <= 4f)
         {
-            if (Target != null)
-            {
-                _rndDestinationOffset = Random.Range(0f, 1f);
-                _agent.destination = new Vector3(Target.transform.position.x + _rndDestinationOffset, Target.transform.position.y + _rndDestinationOffset, Target.transform.position.z + _rndDestinationOffset);
-            }
 
+
+            Vector3 _destination2;
+            float _rndDestinationOffsetX = Random.Range(-17f, 17f);
+            float _rndDestinationOffsetZ = Random.Range(-17f, 17f);
+
+            _destination2 = new Vector3(_destination.position.x + _rndDestinationOffsetX, _destination.position.y, _destination.position.z + _rndDestinationOffsetZ);
+            _agent.destination = _destination2;
         }
-	}
+    }
 
     //private void OnDrawGizmos()
     //{
