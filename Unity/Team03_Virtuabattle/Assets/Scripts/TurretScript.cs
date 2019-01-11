@@ -33,6 +33,11 @@ public class TurretScript : MonoBehaviour {
     public int Health = 50;
     public Material[] stateMaterials = new Material[2];
 
+    //Destruction-Related
+    private float _destroyTimer = 0;
+    public bool TurretDestroyed = false;
+    public bool BaseTurret = false;
+
     //private LayerMask _layermask;
 
     private void Awake()
@@ -54,21 +59,26 @@ public class TurretScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        
-
-        Timer -= Time.deltaTime;
-
-        if (EnemiesNear)
-
+        if (!TurretDestroyed)
         {
-            HandleCombat();
-            SetEnemyTarget();
+            Timer -= Time.deltaTime;
+
+            if (EnemiesNear)
+
+            {
+                HandleCombat();
+                SetEnemyTarget();
+            }
+            else
+            {
+                if (!headRotationReset && !HasTarget) ResetHead();
+            }
         }
         else
-        {
-            if (!headRotationReset && !HasTarget) ResetHead();
-        }
+        { TurretDestroyedTimer(); }
+        
+
+
 
     }
 
@@ -261,6 +271,7 @@ public class TurretScript : MonoBehaviour {
         {
             Captured = true;
             TeamNumber = teamnumber;
+            Debug.Log(teamnumber);
             turretHead.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[teamnumber - 1];
         }
     }
@@ -280,5 +291,33 @@ public class TurretScript : MonoBehaviour {
             }
 
         }
+    }
+
+    public void TurretDestroyedSet()
+    {
+        TurretDestroyed = true;
+        _destroyTimer = 5;
+        turretHead.GetComponent<Renderer>().material = stateMaterials[1];
+    }
+
+    private void TurretDestroyedTimer()
+    {
+        //_destroyTimer -= Time.deltaTime;
+        //if (_destroyTimer <= 0)
+        //{
+        //    if (BaseTurret)
+        //    {
+        //        turretHead.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[TeamNumber - 1];
+        //    }
+        //    else
+        //    {
+        //        turretHead.GetComponent<Renderer>().material = stateMaterials[0];
+        //        Captured = false;
+        //        TeamNumber = 0;
+        //    }
+        //    TurretDestroyed = false;
+        //    Health = 50;
+        //    _capturing = 0;
+        //}
     }
 }

@@ -390,7 +390,9 @@ MonoBehaviour:
   Health: 50
   stateMaterials:
   - {fileID: 2100000, guid: 5e9f62bfb8aebb641bf5f32495d3ea93, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 250c3016f1365194b9f9d22ee5dc4939, type: 2}
+  TurretDestroyed: 0
+  BaseTurret: 0
 --- !u!114 &114761455029082100
 MonoBehaviour:
   m_ObjectHideFlags: 1

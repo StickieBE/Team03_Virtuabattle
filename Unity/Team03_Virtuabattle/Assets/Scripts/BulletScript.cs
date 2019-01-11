@@ -80,7 +80,13 @@ public class BulletScript : MonoBehaviour {
                 other.GetComponent<AIScript>().RemoveHP(1);
                 break;
             case "Turret":
-                other.GetComponent<TurretScript>().RemoveHP(1);
+                TurretScript _turret = other.GetComponent<TurretScript>();
+                _turret.RemoveHP(1);
+                if (_turret.Health <= 0)
+                {
+                    _turret.TurretDestroyedSet();
+                    Debug.Log("Team " + team + " Destroyed a turret from team " + _turret.TeamNumber);
+                }
                 break;
             case "Player":
                 other.GetComponent<VariableController>().RemoveHP(1);

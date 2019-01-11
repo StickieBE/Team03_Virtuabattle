@@ -650,7 +650,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1277102585697268}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -939,7 +939,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585172911049596}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1062,7 +1062,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5e9f62bfb8aebb641bf5f32495d3ea93, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1134,8 +1134,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
+    firstSubMesh: 10
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1202,7 +1202,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1239,8 +1239,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
+    firstSubMesh: 24
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1274,8 +1274,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
+    firstSubMesh: 8
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1344,8 +1344,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
+    firstSubMesh: 16
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1415,7 +1415,7 @@ MeshRenderer:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
-    subMeshCount: 0
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1449,8 +1449,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
+    firstSubMesh: 18
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1552,7 +1552,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5e9f62bfb8aebb641bf5f32495d3ea93, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1624,8 +1624,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
+    firstSubMesh: 26
+    subMeshCount: 1
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1711,7 +1711,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1587819160194514}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33225040129958222
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1732,7 +1732,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1133980515203744}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33480751994671854
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1753,14 +1753,14 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516141247592400}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33523743019437930
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1170117562844890}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33555873584179000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1781,7 +1781,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1368258107258146}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33755069158837516
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1795,7 +1795,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1429038775153798}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33857057458242920
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1809,7 +1809,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1301087038240084}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33960854832245260
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1954,8 +1954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretHead: {fileID: 0}
-  turretBase: {fileID: 0}
+  turretHead: {fileID: 1205013883150138}
+  turretBase: {fileID: 1551251881357500}
   TurretMaterial: {fileID: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
@@ -1967,7 +1967,9 @@ MonoBehaviour:
   Health: 50
   stateMaterials:
   - {fileID: 2100000, guid: 5e9f62bfb8aebb641bf5f32495d3ea93, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 250c3016f1365194b9f9d22ee5dc4939, type: 2}
+  TurretDestroyed: 0
+  BaseTurret: 1
 --- !u!114 &114626138899159272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1994,8 +1996,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretHead: {fileID: 0}
-  turretBase: {fileID: 0}
+  turretHead: {fileID: 1387782766233402}
+  turretBase: {fileID: 1759019887474870}
   TurretMaterial: {fileID: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
@@ -2007,7 +2009,9 @@ MonoBehaviour:
   Health: 50
   stateMaterials:
   - {fileID: 2100000, guid: 5e9f62bfb8aebb641bf5f32495d3ea93, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 250c3016f1365194b9f9d22ee5dc4939, type: 2}
+  TurretDestroyed: 0
+  BaseTurret: 1
 --- !u!114 &114752727168409262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2019,7 +2023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97cf24b347d42a04988a9a4eeab41a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamNumber: 1
+  TeamNumber: 2
 --- !u!114 &114857646829890804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2031,8 +2035,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbefded05f751f4097c2b795a613e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretHead: {fileID: 0}
-  turretBase: {fileID: 0}
+  turretHead: {fileID: 1585172911049596}
+  turretBase: {fileID: 1983364689603260}
   TurretMaterial: {fileID: 0}
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 2}
@@ -2044,7 +2048,9 @@ MonoBehaviour:
   Health: 50
   stateMaterials:
   - {fileID: 2100000, guid: 5e9f62bfb8aebb641bf5f32495d3ea93, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 250c3016f1365194b9f9d22ee5dc4939, type: 2}
+  TurretDestroyed: 0
+  BaseTurret: 1
 --- !u!114 &114896295282334850
 MonoBehaviour:
   m_ObjectHideFlags: 1
