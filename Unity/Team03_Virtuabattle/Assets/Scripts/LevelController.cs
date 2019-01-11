@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
 
@@ -10,8 +11,9 @@ public class LevelController : MonoBehaviour {
     public GameObject[] Spawns;
     public Material[] TeamColors;
     public static LevelController Instance;
+    public int WinnerScreen;
 
-    //public GameObject[] _players;
+    public GameObject[] _players;
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -53,4 +55,19 @@ public class LevelController : MonoBehaviour {
         //    " / " + 
         //    "Loaded scene: " + LevelController.SceneToLoad);
 	}
+
+    //Warning: This code is shit.
+    public void WinConditionCheck()
+    {
+        _players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(_players.Length);
+        if (_players.Length == 2)
+        {
+            GameObject GameController = GameObject.FindGameObjectWithTag("GameController");
+
+            GameController.GetComponent<SaveInformation>().WinnerMat = TeamColors[_players[0].GetComponent<VariableController>().Player - 1];
+            SceneManager.LoadScene(WinnerScreen);
+            Debug.Log("Load Victory");
+        }
+    }
 }
