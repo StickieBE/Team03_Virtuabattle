@@ -50,11 +50,17 @@ public class TurretScript : MonoBehaviour {
 
         Timer = ShootTime;
         defaultHeadPosition = turretHead.transform;
-
-        if(!Captured)
+        if (BaseTurret)
+        {
+            Captured = true;
+            TurretDestroyedSet();
+            TeamNumber = GetComponentInParent<BaseController>().TeamNumber;
+        }
+        if (!Captured)
         {
             turretHead.GetComponent<Renderer>().material = stateMaterials[0]; 
         }
+
     }
 	
 	// Update is called once per frame
@@ -302,22 +308,22 @@ public class TurretScript : MonoBehaviour {
 
     private void TurretDestroyedTimer()
     {
-        //_destroyTimer -= Time.deltaTime;
-        //if (_destroyTimer <= 0)
-        //{
-        //    if (BaseTurret)
-        //    {
-        //        turretHead.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[TeamNumber - 1];
-        //    }
-        //    else
-        //    {
-        //        turretHead.GetComponent<Renderer>().material = stateMaterials[0];
-        //        Captured = false;
-        //        TeamNumber = 0;
-        //    }
-        //    TurretDestroyed = false;
-        //    Health = 50;
-        //    _capturing = 0;
-        //}
+        _destroyTimer -= Time.deltaTime;
+        if (_destroyTimer <= 0)
+        {
+            if (BaseTurret)
+            {
+                turretHead.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[TeamNumber - 1];
+            }
+            else
+            {
+                turretHead.GetComponent<Renderer>().material = stateMaterials[0];
+                Captured = false;
+                TeamNumber = 0;
+            }
+            TurretDestroyed = false;
+            Health = 50;
+            _capturing = 0;
+        }
     }
 }
