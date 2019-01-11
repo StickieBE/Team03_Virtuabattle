@@ -7,12 +7,12 @@ public class TurretScript : MonoBehaviour {
 
     // Turret parts
     public GameObject Barrel { get; set; }
-    GameObject turretHead, turretBase;
+    [HideInInspector] public GameObject turretHead, turretBase;
     Transform defaultHeadPosition;
 
     // Team-related
     public int TeamNumber { get; set; }
-    public Color TurretColor;
+    public Renderer TurretMaterial;
 
     // Easy to read code
     bool HasTarget => ((_target == null) ? false : true);
@@ -28,8 +28,10 @@ public class TurretScript : MonoBehaviour {
     bool headRotationReset = true;
 
     // Turret variables
+    private float _capturing = 0;
     public bool Captured;
     public int Health = 50;
+    public Material[] stateMaterials = new Material[2];
 
     //private LayerMask _layermask;
 
@@ -40,31 +42,33 @@ public class TurretScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //if (TeamNumber != 2) Destroy(gameObject);
+
         Timer = ShootTime;
-        Captured = false;
         defaultHeadPosition = turretHead.transform;
+
+        if(!Captured)
+        {
+            turretHead.GetComponent<Renderer>().material = stateMaterials[0]; 
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        
+
         Timer -= Time.deltaTime;
 
-        if (EnemiesNear) HandleCombat();
+        if (EnemiesNear)
+
+        {
+            HandleCombat();
+            SetEnemyTarget();
+        }
         else
         {
-            //#if DEBUG
-            //            Debug.Log(
-            //                string.Format(
-            //                    "{0} enemies near, scanning...",
-            //                    _enemies.Count
-            //                )
-            //            );
-            //#endif
             if (!headRotationReset && !HasTarget) ResetHead();
         }
-        //CheckCaptured();
 
     }
 
@@ -93,7 +97,7 @@ public class TurretScript : MonoBehaviour {
 
     private void HandleCombat()
     {
-        if (HasTarget)
+        if (HasTarget && Captured)
         {
             //#if DEBUG
             //            Debug.Log(
@@ -186,18 +190,22 @@ public class TurretScript : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         GameObject _gameObject = other.gameObject;
-        if (IsValidEnemy(_gameObject))
+
+        if (Captured)
         {
-            if (!CheckIfAlreadyAdded(_gameObject))
+            if (IsValidEnemy(_gameObject))
             {
-                _enemies.Add(_gameObject);
-                //Debug.Log(
-                //    string.Format(
-                //        "Added enemy {0} with tag {1}",
-                //        _gameObject,
-                //        _gameObject.tag
-                //    )
-                //);
+                if (!CheckIfAlreadyAdded(_gameObject))
+                {
+                    _enemies.Add(_gameObject);
+                    //Debug.Log(
+                    //    string.Format(
+                    //        "Added enemy {0} with tag {1}",
+                    //        _gameObject,
+                    //        _gameObject.tag
+                    //    )
+                    //);
+                }
             }
         }
     }
@@ -209,6 +217,8 @@ public class TurretScript : MonoBehaviour {
         {
             if (CheckIfAlreadyAdded(_gameObject))
             {
+                _gameObject.GetComponent<AIScript>().Target = null;
+                _gameObject.GetComponent<AIScript>().HasTarget = false;
                 if (_target == _gameObject) _target = null;
                 _enemies.Remove(_gameObject);
                 //Debug.Log(
@@ -243,83 +253,32 @@ public class TurretScript : MonoBehaviour {
         Health -= amount;
     }
 
-    private void CheckCaptured()
+    public void Capture(int teamnumber)
     {
-        //if (!Captured)
-        //{
-        //    _layermask = ((1 << 10) | (1 << 11) | (1 << 12) | (1 << 13));
-        //    Enemies = Physics.OverlapSphere(Base.transform.position, 5, _layermask);
-        //    if (Enemies.Length > 0)
-        //    {
-        //        //TeamNumber = Enemies[0].gameObject.GetComponent<AIScript>().TeamNumber;
-
-        //        //_layermask = DefineLayerMask(TeamNumber);
-
-        //        foreach (Renderer material in Head.GetComponentsInChildren<Renderer>())
-        //        {
-        //            material.material = TurretColor[TeamNumber - 1];
-        //        }
-        //        Captured = true;
-        //    }
-        //}
-        //else
-        //{
-        //    Enemies = Physics.OverlapSphere(Base.transform.position, 5, _layermask);
-        //    if (Enemies.Length > 0)
-        //    {
-        //        Head.transform.LookAt(Enemies[Enemies.Length - 1].transform);
-        //        Timer -= Time.deltaTime;
-        //        if (Timer <= 0)
-        //        {
-        //            Shoot(BulletPrefab, SpawnPosition, Enemies[Enemies.Length - 1].transform.position + Enemies[Enemies.Length - 1].transform.forward * 0.6f, Head.transform.rotation, gameObject);
-        //            Timer = ShootTime;
-        //        }
-
-        //        foreach (Collider enemy in Enemies)
-        //        {
-        //            if (enemy.GetComponent<AIScript>().HasTarget == false)
-        //            {
-        //                enemy.GetComponent<AIScript>().Target = Head;
-        //                enemy.GetComponent<AIScript>().HasTarget = true;
-        //            }
-        //        }
-        //    }
-        //}
+        Debug.Log(_capturing);
+        _capturing += Time.deltaTime;
+        if (_capturing >= 3)
+        {
+            Captured = true;
+            TeamNumber = teamnumber;
+            turretHead.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[teamnumber - 1];
+        }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawWireSphere(turretBase.transform.position, 5);
-    //    Gizmos.color = Color.red;
-    //    foreach (GameObject enemy in _enemies)
-    //    {
-    //        if (enemy != null) Gizmos.DrawWireSphere(enemy.transform.position, 0.6f);
-    //    }
+    private void SetEnemyTarget()
+    {
+        foreach (GameObject enemy in _enemies)
+        {
+            if (enemy != null)
+            {
+                AIScript _AIScript = enemy.GetComponent<AIScript>();
+                if (_AIScript.HasTarget == false)
+                {
+                    _AIScript.Target = turretHead;
+                    _AIScript.HasTarget = true;
+                }
+            }
 
-    //}
-
-    //public static LayerMask DefineLayerMask(int ObjectTeamNumber)
-    //{
-    //    LayerMask Layermask = new LayerMask();
-
-    //    switch (ObjectTeamNumber)
-    //    {
-    //        case 1:
-    //             Layermask = ((1 << 11) | (1 << 12) | (1 << 13));
-    //            break;
-    //        case 2:
-    //            Layermask = ((1 << 10) | (1 << 12) | (1 << 13));
-    //            break;
-    //        case 3:
-    //            Layermask = ((1 << 11) | (1 << 10) | (1 << 13));
-    //            break;
-    //        case 4:
-    //            Layermask = ((1 << 11) | (1 << 12) | (1 << 10));
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //    return Layermask;
-    //}
-
+        }
+    }
 }

@@ -8,8 +8,10 @@ public class LevelController : MonoBehaviour {
     public int AmountOfPlayers, SceneToLoad;
     public GameObject PlayerPrefab;
     public GameObject[] Spawns;
+    public Material[] TeamColors;
     public static LevelController Instance;
 
+    //public GameObject[] _players;
     private void Awake()
     {
         if (Instance == null) Instance = this;
