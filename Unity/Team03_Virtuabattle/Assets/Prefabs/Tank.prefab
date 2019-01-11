@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3faffbb1c37685246833c5d80ff3ccc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Barrel: {fileID: 1374443368607536}
   Health: 10
   HasTarget: 0
   Target: {fileID: 0}
