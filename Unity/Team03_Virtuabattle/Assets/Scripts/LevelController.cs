@@ -13,7 +13,7 @@ public class LevelController : MonoBehaviour {
     public static LevelController Instance;
     public int WinnerScreen;
 
-    public GameObject[] _players;
+    public List<GameObject> Players = new List<GameObject>();
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -45,6 +45,7 @@ public class LevelController : MonoBehaviour {
             _createdPlayer.transform.parent = _parent.transform;
             _createdPlayer.GetComponent<VariableController>().Player = i + 1;
             _createdPlayer.transform.LookAt(Vector3.zero);
+            Players.Add(_createdPlayer);
         }
     }
 
@@ -59,13 +60,11 @@ public class LevelController : MonoBehaviour {
     //Warning: This code is shit.
     public void WinConditionCheck()
     {
-        _players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(_players.Length);
-        if (_players.Length == 2)
+        if (Players.Count == 2)
         {
             GameObject GameController = GameObject.FindGameObjectWithTag("GameController");
 
-            GameController.GetComponent<SaveInformation>().WinnerMat = TeamColors[_players[0].GetComponent<VariableController>().Player - 1];
+            GameController.GetComponent<SaveInformation>().WinnerMat = TeamColors[Players[0].GetComponent<VariableController>().Player - 1];
             SceneManager.LoadScene(WinnerScreen);
             Debug.Log("Load Victory");
         }

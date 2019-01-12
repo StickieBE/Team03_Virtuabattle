@@ -64,10 +64,11 @@ public class SpawnUnitsScript : MonoBehaviour {
         _timer-= Time.deltaTime;
 	}
 
-    public void SpawnUnit()
+    public void SpawnUnit(VariableController _variableControllerPlayer)
     {
         if (_timer <= 0)
         {
+            _variableControllerPlayer.RemoveGold(1);
             //#if DEBUG
             //Debug.Log("Spawn");
             //#endif

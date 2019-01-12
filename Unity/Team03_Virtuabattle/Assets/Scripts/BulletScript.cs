@@ -77,19 +77,49 @@ public class BulletScript : MonoBehaviour {
             case "Tank":
                 AIScript _theScript = other.GetComponent<AIScript>()??null;
                 //if (_theScript == null) _theScript = other.GetComponentInParent<AIScript>() ?? null;
-                other.GetComponent<AIScript>().RemoveHP(1);
+
+                AIScript _aiScript = other.GetComponent<AIScript>();
+
+                // Handles currency reward for killing
+                if (_aiScript.Health - 1 <= 0)
+                {
+                    // Check if player
+                    if (Origin.GetComponent<VariableController>() != null) Origin.GetComponent<VariableController>().AddGold(1);
+                    // Add to player belonging to same team
+                    else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(1);
+                }
+                _aiScript.RemoveHP(1);
                 break;
             case "Turret":
                 TurretScript _turret = other.GetComponent<TurretScript>();
-                _turret.RemoveHP(1);
-                if (_turret.Health <= 0)
+
+                // Handles currency reward for killing
+                if (_turret.Health - 1 <= 0)
                 {
                     _turret.TurretDestroyedSet();
                     Debug.Log("Team " + team + " Destroyed a turret from team " + _turret.TeamNumber);
+
+                    // Check if player
+                    if (Origin.GetComponent<VariableController>() != null) Origin.GetComponent<VariableController>().AddGold(2);
+
+                    // Add to player belonging to same team
+                    else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(2);
                 }
+                _turret.RemoveHP(1);
                 break;
             case "Player":
-                other.GetComponent<VariableController>().RemoveHP(1);
+                VariableController Target = other.GetComponent<VariableController>();
+
+                // Handles currency reward for killing
+                if (Target.Health - 1 <= 0)
+                {
+                    // Check if player
+                    if (Origin.GetComponent<VariableController>() != null) Origin.GetComponent<VariableController>().AddGold(5);
+                    // Add to player belonging to same team
+                    else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(5);
+                }
+
+                Target.RemoveHP(1);
                 break;
             default:
                 break;

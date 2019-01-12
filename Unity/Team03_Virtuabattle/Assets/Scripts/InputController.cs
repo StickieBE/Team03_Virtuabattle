@@ -66,7 +66,7 @@ public class InputController : MonoBehaviour {
                 if (_hitObject.tag == "SpawnPillar")
                 {
                     SpawnUnitsScript _spawner = _hitObject.GetComponent<SpawnUnitsScript>();
-                    if (_spawner.TeamNumber == variableController.Player) _spawner.SpawnUnit();
+                    if (_spawner.TeamNumber == variableController.Player && variableController.Gold > 0) _spawner.SpawnUnit(variableController);
                 }
             }
             Debug.DrawRay(transform.position, _cameraTransform.forward, Color.red, 100);

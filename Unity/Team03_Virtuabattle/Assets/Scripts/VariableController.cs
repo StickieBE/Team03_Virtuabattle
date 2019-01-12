@@ -6,7 +6,7 @@ public class VariableController : MonoBehaviour {
 
     public int Player;
     public int Health { get; private set; } = 50;
-    //public int Gold { get; set; }
+    public int Gold { get; private set; } = 20;
     //public int AmmunitionType1 { get; set; }
     //public int AmmunitionType2 { get; set; }
     //public int AmmunitionType3 { get; set; }
@@ -33,5 +33,15 @@ public class VariableController : MonoBehaviour {
             )
         );
         Health -= amount;
+    }
+
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+    }
+
+    public void RemoveGold(int amount)
+    {
+        Gold -= amount;
     }
 }
