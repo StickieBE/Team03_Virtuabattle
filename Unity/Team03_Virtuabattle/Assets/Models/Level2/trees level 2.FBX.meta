@@ -38,7 +38,22 @@ ModelImporter:
     4300006: big tree001
     4300008: long tree001
     4300010: smol tree001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: 3d613ef2209244e4187b76fc629409a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 02 - Default
+    second: {fileID: 2100000, guid: 660dda6d91a7d5146b8365aa63a85fd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 03 - Default
+    second: {fileID: 2100000, guid: 1e8fefbdeb147d241b5524ef6ee5560c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
