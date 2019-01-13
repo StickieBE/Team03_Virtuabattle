@@ -16,11 +16,35 @@ public class LoseConditionCheckScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Enemies.RemoveAll(GameObject => GameObject == null);
-        if(Enemies.Count >=10 && _destroyed == false)
+        if (Enemies.Count >= 10 && _destroyed == false)
         {
             _timer += Time.deltaTime;
-            if (_timer>=10)
+            if (_timer >= 10)
             {
+                Lost();
+            }
+        }
+
+	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Tank" && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber && !CheckIfAlreadyAdded(other.gameObject))
+        {
+            Enemies.Add(other.gameObject);
+        }
+    }
+
+    private bool CheckIfAlreadyAdded(GameObject collider)
+    {
+        for (int i = 0; i < Enemies.Count; i++)
+            if (collider == Enemies[i]) return true;
+        return false;
+    }
+
+    public void Lost()
+    {
+
                 GameObject[] _tanks;
                 Debug.Log("Team " + TeamNumber + " Lost");
                 _tanks = GameObject.FindGameObjectsWithTag("Tank");
@@ -66,23 +90,5 @@ public class LoseConditionCheckScript : MonoBehaviour {
                 LevelController.Instance.WinConditionCheck();
                 Debug.Log("Win");
             }
-        }
-
-	}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Tank" && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber && !CheckIfAlreadyAdded(other.gameObject))
-        {
-            Enemies.Add(other.gameObject);
-        }
-    }
-
-    private bool CheckIfAlreadyAdded(GameObject collider)
-    {
-        for (int i = 0; i < Enemies.Count; i++)
-            if (collider == Enemies[i]) return true;
-        return false;
-    }
 
 }

@@ -34,6 +34,10 @@ public class VariableController : MonoBehaviour {
         );
         Health -= amount;
     }
+    public void AddHP(int amount)
+    {
+        Health += amount;
+    }
 
     public void AddGold(int amount)
     {

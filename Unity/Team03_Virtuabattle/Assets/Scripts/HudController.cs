@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HudController : MonoBehaviour {
 
     public Text goldAmountUI;
+    public Slider Health;
     VariableController _variableController;
 
 	// Use this for initialization
@@ -16,5 +17,9 @@ public class HudController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (goldAmountUI.text != _variableController.Gold.ToString()) goldAmountUI.text = _variableController.Gold.ToString();
+        if (Health.value != (_variableController.Health * 2))
+        {
+            Health.value = (_variableController.Health * 2);
+        }
     }
 }

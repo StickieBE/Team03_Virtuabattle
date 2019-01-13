@@ -30,7 +30,7 @@ public class AIScript : MonoBehaviour {
     private float _checkTimer = 0;
     public float _checkTimerCooldown;
     public GameObject BulletPrefab;
-
+    public GameObject ColorBody;
     private void Awake()
     {
         spawnPoints = LevelController.Instance.Spawns;
@@ -58,7 +58,7 @@ public class AIScript : MonoBehaviour {
         _agent.enabled = true;
         _agent.destination = _destination.position;
         //_agent.speed = 10;
-
+        ColorBody.GetComponent<Renderer>().material = LevelController.Instance.TeamColors[TeamNumber - 1];
 
     }
 	
