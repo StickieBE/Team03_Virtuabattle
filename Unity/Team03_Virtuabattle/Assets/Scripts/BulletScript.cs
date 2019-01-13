@@ -102,7 +102,7 @@ public class BulletScript : MonoBehaviour {
                 TurretScript _turret = other.GetComponent<TurretScript>();
 
                 // Handles currency reward for killing
-                if (_turret.Health - 1 <= 0)
+                if (_turret.Health - 1 <= 0 && _turret.Health> 0)
                 {
                     _turret.TurretDestroyedSet();
                     Debug.Log("Team " + team + " Destroyed a turret from team " + _turret.TeamNumber);
@@ -122,9 +122,9 @@ public class BulletScript : MonoBehaviour {
                 if (Target.Health - 1 <= 0)
                 {
                     // Check if player
-                    if (Origin.GetComponent<VariableController>() != null) Origin.GetComponent<VariableController>().AddGold(5);
+                    if (Origin.GetComponent<VariableController>() != null) Origin.GetComponent<VariableController>().AddGold(20);
                     // Add to player belonging to same team
-                    else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(5);
+                    else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(20);
                 }
 
                 if (Origin.tag == "Player")
