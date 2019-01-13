@@ -8,6 +8,7 @@ TagManager:
   - Turret
   - Bullet
   - Tank
+  - Slider
   layers:
   - Default
   - TransparentFX
