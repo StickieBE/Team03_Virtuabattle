@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.5660378, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 143511160825591216}
   - component: {fileID: 114627456966367878}
   - component: {fileID: 114683165151432566}
+  - component: {fileID: 573879825189429542}
   - component: {fileID: 114004849409587558}
   - component: {fileID: 114932254297152250}
   - component: {fileID: 114616944813817542}
@@ -696,6 +697,18 @@ MonoBehaviour:
   CastLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &573879825189429542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932090307879420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1298ef60d672a5f47a911bf0ddc6d378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114004849409587558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldAmountUI: {fileID: 9014777056815117293}
+  Health: {fileID: 114850659206929266}
 --- !u!114 &114616944813817542
 MonoBehaviour:
   m_ObjectHideFlags: 0

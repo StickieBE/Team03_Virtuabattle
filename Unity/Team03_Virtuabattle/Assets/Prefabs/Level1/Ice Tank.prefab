@@ -134,6 +134,7 @@ MonoBehaviour:
   _checkTimerCooldown: 0
   BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
     type: 3}
+  ColorBody: {fileID: 1602570374587438}
 --- !u!135 &135234011142663512
 SphereCollider:
   m_ObjectHideFlags: 0

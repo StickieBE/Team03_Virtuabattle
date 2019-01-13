@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 114627456966367878}
   - component: {fileID: 114683165151432566}
   - component: {fileID: 114004849409587558}
+  - component: {fileID: 8765435086447118991}
   - component: {fileID: 114932254297152250}
   - component: {fileID: 114616944813817542}
   m_Layer: 11
@@ -709,6 +710,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationSpeed: 2.5
   CameraPivot: {fileID: 4088256532155878}
+--- !u!114 &8765435086447118991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932090307879420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1298ef60d672a5f47a911bf0ddc6d378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114932254297152250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldAmountUI: {fileID: 8006020826148491261}
+  Health: {fileID: 114850659206929266}
 --- !u!114 &114616944813817542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,8 +1003,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 179acbffce3fbf142bdbacdc23415b83, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
