@@ -127,7 +127,11 @@ public class BulletScript : MonoBehaviour {
                     else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(5);
                 }
 
-                Target.RemoveHP(1);
+                if (Origin.tag == "Player")
+                {
+                    Target.RemoveHP(3);
+                }
+                else { Target.RemoveHP(1); }
                 break;
             default:
                 break;
