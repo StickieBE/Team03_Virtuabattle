@@ -85,8 +85,16 @@ public class BulletScript : MonoBehaviour {
                 {
                     // Check if player
                     if (Origin.GetComponent<VariableController>() != null) Origin.GetComponent<VariableController>().AddGold(1);
+
                     // Add to player belonging to same team
-                    else LevelController.Instance.Players[team - 1].GetComponent<VariableController>().AddGold(1);
+                    else
+                    {
+                        foreach (GameObject player in LevelController.Instance.Players)
+                        {
+                            VariableController _varController = player.GetComponent<VariableController>();
+                            if (_varController.Player == team) _varController.AddGold(1);
+                        }
+                    }
                 }
                 _aiScript.RemoveHP(1);
                 break;
