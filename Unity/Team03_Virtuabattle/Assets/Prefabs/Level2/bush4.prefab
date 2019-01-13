@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8557997666419704234}
   - component: {fileID: 8557997666421031306}
   - component: {fileID: 8557997666421998410}
+  - component: {fileID: 2438388555510296789}
+  - component: {fileID: 7250616530751958384}
   m_Layer: 0
   m_Name: bush4
   m_TagString: Untagged
@@ -77,3 +79,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2438388555510296789
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557997666420006282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300004, guid: e8d379f65716f9d4ab990f6bef1834df, type: 3}
+--- !u!114 &7250616530751958384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557997666420006282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2777bba7e4e7c6f4681e3ea77eef5438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 8.464453, y: 5.255478, z: 2}
+  m_Center: {x: -0.5365257, y: -0.21726704, z: 0}
+  m_Area: 0
+  m_AffectedAgents: ffffffff
