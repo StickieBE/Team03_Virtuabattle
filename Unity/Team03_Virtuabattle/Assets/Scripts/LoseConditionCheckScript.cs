@@ -24,8 +24,8 @@ public class LoseConditionCheckScript : MonoBehaviour {
                 Lost();
             }
         }
-        LevelController.Instance.WinConditionCheck();
-    }
+
+	}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -87,7 +87,7 @@ public class LoseConditionCheckScript : MonoBehaviour {
 
 
                 _destroyed = true;
-
+                LevelController.Instance.WinConditionCheck();
                 Debug.Log("Win");
             }
 
