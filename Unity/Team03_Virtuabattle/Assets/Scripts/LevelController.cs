@@ -14,9 +14,14 @@ public class LevelController : MonoBehaviour {
     public int WinnerScreen;
 
     public List<GameObject> Players = new List<GameObject>();
+
+    private SaveInformation _saveInfo;
     private void Awake()
     {
+        _saveInfo = GameObject.FindGameObjectWithTag("GameController").GetComponent<SaveInformation>();
         if (Instance == null) Instance = this;
+        AmountOfPlayers = _saveInfo.PlayerCount;
+
     }
 
     // Use this for initialization
@@ -60,7 +65,13 @@ public class LevelController : MonoBehaviour {
     //Warning: This code is shit.
     public void WinConditionCheck()
     {
-        if (Players.Count == 2)
+        for (int i = 0; i < Players.Count; i++)
+        {
+            if (Players[i] == null)
+                Players.RemoveAt(i);
+        }
+        Debug.Log(Players.Count);
+        if (Players.Count == 1)
         {
             GameObject GameController = GameObject.FindGameObjectWithTag("GameController");
 
