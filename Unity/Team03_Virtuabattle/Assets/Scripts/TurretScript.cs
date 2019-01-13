@@ -302,7 +302,7 @@ public class TurretScript : MonoBehaviour {
     public void TurretDestroyedSet()
     {
         TurretDestroyed = true;
-        _destroyTimer = 5;
+        _destroyTimer = 10;
         turretHead.GetComponent<Renderer>().material = stateMaterials[1];
     }
 

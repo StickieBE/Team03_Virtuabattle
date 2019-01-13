@@ -35,7 +35,7 @@ public class BulletScript : MonoBehaviour {
         if (_target != null)
         {
             Vector3 offset = _target.GetComponent<AIScript>() != null ? _target.GetComponent<AIScript>().Velocity : Vector3.zero;
-            _direction = (_target.transform.position + offset - Origin.transform.position).normalized;
+            _direction = (_target.transform.position + (offset/*.normalized * 0.3f*/) - Origin.transform.position).normalized;
         }
         else
         {

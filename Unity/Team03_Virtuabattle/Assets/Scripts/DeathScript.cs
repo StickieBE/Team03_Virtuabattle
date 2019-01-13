@@ -34,7 +34,7 @@ public class DeathScript : MonoBehaviour
 
         else if (_varContr.Gold < 20)
         {
-            LevelController.Instance.Spawns[_varContr.Player].GetComponentInChildren<LoseConditionCheckScript>().Lost();
+            LevelController.Instance.Spawns[_varContr.Player-1].GetComponentInChildren<LoseConditionCheckScript>().Lost();
         }
 
     }

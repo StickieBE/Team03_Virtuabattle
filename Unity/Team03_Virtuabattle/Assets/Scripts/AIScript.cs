@@ -105,7 +105,7 @@ public class AIScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "AI" && other.gameObject.GetComponent<AIScript>() != null && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) Target = other.gameObject;
+        if (other.tag == "Tank" && other.gameObject.GetComponent<AIScript>() != null && other.gameObject.GetComponent<AIScript>().TeamNumber != TeamNumber) Target = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
