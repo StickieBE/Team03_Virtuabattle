@@ -358,7 +358,7 @@ MonoBehaviour:
   turretHead: {fileID: 0}
   turretBase: {fileID: 0}
   TurretMaterial: {fileID: 0}
-  BulletPrefab: {fileID: 1862016636852546, guid: c965366457a9434429cbc977d8f0f578,
+  BulletPrefab: {fileID: 1862016636852546, guid: 855126f6fe94d6148bbe771003ee7974,
     type: 3}
   ShootTime: 0.5
   RaycastIgnoreLayer:

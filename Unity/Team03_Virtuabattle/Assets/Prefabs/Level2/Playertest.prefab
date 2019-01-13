@@ -294,13 +294,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503528242092672}
-  m_LocalRotation: {x: 0.2840153, y: 0, z: 0, w: 0.95881975}
-  m_LocalPosition: {x: 0, y: 4.45, z: -5.3}
+  m_LocalRotation: {x: 0.22537951, y: -0, z: -0, w: 0.9742711}
+  m_LocalPosition: {x: 0, y: 3.13, z: -3.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4088256532155878}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 33, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 26.050001, y: 0, z: 0}
 --- !u!20 &20229624987584170
 Camera:
   m_ObjectHideFlags: 0
@@ -457,7 +457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798766377350944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.044, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3968444756637989603}
@@ -935,7 +935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.0002593994, y: -0.00015258789}
+  m_AnchoredPosition: {x: -0.00024414062, y: -0.00015258789}
   m_SizeDelta: {x: 75, y: 60}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &7102095879593570343
@@ -1158,14 +1158,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300002, guid: 3b4ee33cc7ff4a243b5e531fa7ec4b20, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 20c6c2df0f28bc04f926e11c989042bb, type: 2}
-    - target: {fileID: 2300004, guid: 3b4ee33cc7ff4a243b5e531fa7ec4b20, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 20c6c2df0f28bc04f926e11c989042bb, type: 2}
     - target: {fileID: 9500000, guid: 3b4ee33cc7ff4a243b5e531fa7ec4b20, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1174,6 +1166,14 @@ PrefabInstance:
       propertyPath: m_CullingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: 3b4ee33cc7ff4a243b5e531fa7ec4b20, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20c6c2df0f28bc04f926e11c989042bb, type: 2}
+    - target: {fileID: 2300004, guid: 3b4ee33cc7ff4a243b5e531fa7ec4b20, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20c6c2df0f28bc04f926e11c989042bb, type: 2}
     - target: {fileID: 13700000, guid: 3b4ee33cc7ff4a243b5e531fa7ec4b20, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

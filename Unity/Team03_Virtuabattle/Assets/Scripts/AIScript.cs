@@ -53,9 +53,12 @@ public class AIScript : MonoBehaviour {
         transform.position = spawnPoints[TeamNumber - 1].transform.position;
         _destination = spawnPoints[_rndPathNumber].transform;
 
+
         _agent = GetComponent<NavMeshAgent>();
+        _agent.enabled = true;
         _agent.destination = _destination.position;
-        _agent.speed = 10;
+        //_agent.speed = 10;
+
 
     }
 	
