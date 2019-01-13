@@ -2843,6 +2843,12 @@ PrefabInstance:
       propertyPath: TeamNumber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114366950679375346, guid: 5fbf4facafdeb5d469b1252d187642df,
+        type: 3}
+      propertyPath: LandPrefab
+      value: 
+      objectReference: {fileID: 1602570374587438, guid: 6081c457d62aa1445a0d80af2c2d78e2,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fbf4facafdeb5d469b1252d187642df, type: 3}
 --- !u!1001 &223101612
@@ -4433,6 +4439,11 @@ PrefabInstance:
     - target: {fileID: 4929913045488816, guid: c9bfd12d179f1494a90ba878e7abb4ed, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.6581216
+      objectReference: {fileID: 0}
+    - target: {fileID: 64782243304179752, guid: c9bfd12d179f1494a90ba878e7abb4ed,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9bfd12d179f1494a90ba878e7abb4ed, type: 3}
@@ -9393,6 +9404,7 @@ GameObject:
   - component: {fileID: 866516116}
   - component: {fileID: 866516120}
   - component: {fileID: 866516119}
+  - component: {fileID: 866516121}
   - component: {fileID: 866516118}
   - component: {fileID: 866516117}
   m_Layer: 9
@@ -9432,7 +9444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoolDownTime: 0.5
   troopType: 0
-  LandPrefab: {fileID: 1602570374587438, guid: 58b5467a4ac99f547b0d10174cb89326, type: 3}
+  LandPrefab: {fileID: 1602570374587438, guid: 6081c457d62aa1445a0d80af2c2d78e2, type: 3}
   _tempSpawnPos: {x: 0, y: 0, z: 0}
 --- !u!65 &866516118
 BoxCollider:
@@ -9495,6 +9507,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866516115}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &866516121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866516115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &866729844
 GameObject:
   m_ObjectHideFlags: 0
@@ -19068,6 +19096,7 @@ GameObject:
   - component: {fileID: 1329297575}
   - component: {fileID: 1329297579}
   - component: {fileID: 1329297578}
+  - component: {fileID: 1329297580}
   - component: {fileID: 1329297577}
   - component: {fileID: 1329297576}
   m_Layer: 9
@@ -19107,7 +19136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoolDownTime: 0.5
   troopType: 0
-  LandPrefab: {fileID: 1602570374587438, guid: 58b5467a4ac99f547b0d10174cb89326, type: 3}
+  LandPrefab: {fileID: 1602570374587438, guid: 6081c457d62aa1445a0d80af2c2d78e2, type: 3}
   _tempSpawnPos: {x: 0, y: 0, z: 0}
 --- !u!65 &1329297577
 BoxCollider:
@@ -19170,6 +19199,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329297574}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1329297580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329297574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1330349865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26745,6 +26790,7 @@ GameObject:
   - component: {fileID: 2000833274}
   - component: {fileID: 2000833278}
   - component: {fileID: 2000833277}
+  - component: {fileID: 2000833279}
   - component: {fileID: 2000833276}
   - component: {fileID: 2000833275}
   m_Layer: 9
@@ -26784,7 +26830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoolDownTime: 0.5
   troopType: 0
-  LandPrefab: {fileID: 1602570374587438, guid: 58b5467a4ac99f547b0d10174cb89326, type: 3}
+  LandPrefab: {fileID: 1602570374587438, guid: 6081c457d62aa1445a0d80af2c2d78e2, type: 3}
   _tempSpawnPos: {x: 0, y: 0, z: 0}
 --- !u!65 &2000833276
 BoxCollider:
@@ -26847,6 +26893,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000833273}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2000833279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000833273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07ce676d7afda4dabb3b0f7dd5e654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &2005239199
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 54552887037970086}
   - component: {fileID: 135465555009739042}
   m_Layer: 0
-  m_Name: Tank
+  m_Name: Ice Tank
   m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 1602570374587438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4570983945225120}
   - {fileID: 4658401911693914}
